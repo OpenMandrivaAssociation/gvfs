@@ -17,7 +17,7 @@ Url: http://www.gnome.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: libhal-devel
 BuildRequires: libcdio-devel
-BuildRequires: libfuse-devel
+BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
 BuildRequires: glib2-devel >= 2.15.0
 
