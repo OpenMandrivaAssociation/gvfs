@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 0.1.0
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define major 0
 %define libname %mklibname %name %major
@@ -22,6 +22,8 @@ BuildRequires: libcdio-devel
 BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
 BuildRequires: glib2-devel >= 2.15.1
+#gw the dbus service depends on the daemon in the library package
+Requires: %libname = %version
 
 %description
 This is a Virtual File System library based on gio and Glib.
