@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 0.1.0
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
@@ -11,6 +11,8 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
+# (fc) 0.1.0-2mdv update to latest SVN code
+Patch0: gvfs-0.1.0-svn.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -19,7 +21,7 @@ BuildRequires: libhal-devel
 BuildRequires: libcdio-devel
 BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
-BuildRequires: glib2-devel >= 2.15.0
+BuildRequires: glib2-devel >= 2.15.1
 
 %description
 This is a Virtual File System library based on gio and Glib.
@@ -43,6 +45,10 @@ This is a Virtual File System library based on gio and Glib.
 
 %prep
 %setup -q
+%patch0 -p1 -b .svn
+
+#needed by patch0 
+autoreconf
 
 %build
 %configure2_5x
