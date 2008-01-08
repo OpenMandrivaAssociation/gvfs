@@ -1,6 +1,6 @@
 %define name gvfs
-%define version 0.1.0
-%define release %mkrel 3
+%define version 0.1.1
+%define release %mkrel 1
 
 %define major 0
 %define libname %mklibname %name %major
@@ -11,8 +11,6 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
-# (fc) 0.1.0-2mdv update to latest SVN code
-Patch0: gvfs-0.1.0-svn.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -47,10 +45,6 @@ This is a Virtual File System library based on gio and Glib.
 
 %prep
 %setup -q
-%patch0 -p1 -b .svn
-
-#needed by patch0 
-autoreconf
 
 %build
 %configure2_5x
@@ -71,11 +65,11 @@ rm -rf %{buildroot}
 
 %files -f gvfs.lang
 %defattr(-,root,root)
-%dir %_sysconfdir/gvfs
-%dir %_sysconfdir/gvfs/mounts
-%config(noreplace) %_sysconfdir/gvfs/mounts/*.mount
 %_bindir/gvfs-*
 %_datadir/dbus-1/services/gvfs-daemon.service
+%dir %_datadir/gvfs
+%dir %_datadir/gvfs/mounts
+%_datadir/gvfs/mounts/*.mount
 
 %files -n %libname
 %defattr(-,root,root)
