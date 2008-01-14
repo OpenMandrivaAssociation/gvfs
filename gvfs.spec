@@ -19,6 +19,7 @@ BuildRequires: libhal-devel
 BuildRequires: libcdio-devel
 BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
+BuildRequires: libsoup-devel
 BuildRequires: glib2-devel >= 2.15.2
 BuildRequires: perl-XML-Parser
 #gw the dbus service depends on the daemon in the library package
