@@ -1,5 +1,5 @@
 %define name gvfs
-%define version 0.1.6
+%define version 0.1.7
 %define release %mkrel 1
 
 %define major 0
@@ -20,7 +20,8 @@ BuildRequires: libcdio-devel
 BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
 BuildRequires: libsoup-devel >= 2.3
-BuildRequires: glib2-devel >= 2.15.4
+BuildRequires: glib2-devel >= 2.15.5
+BuildRequires: libGConf2-devel
 BuildRequires: perl-XML-Parser
 #gw the dbus service depends on the daemon in the library package
 Requires: %libname = %version
@@ -75,6 +76,7 @@ rm -rf %{buildroot}
 
 %files -n %libname
 %defattr(-,root,root)
+%_libdir/gio/modules/libgiogconf.so
 %_libdir/gio/modules/libgiohal-volume-monitor.so
 %_libdir/gio/modules/libgvfsdbus.so
 %_libdir/gvfs-fuse-daemon
