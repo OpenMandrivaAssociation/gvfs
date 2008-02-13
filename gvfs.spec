@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 0.1.7
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
@@ -11,6 +11,8 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
+# (fc) 0.1.7-2mdv hide nfs mount point (Mdv bug #37091) (SVN)
+Patch0: gvfs-0.1.7-hidenfsmount.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -48,6 +50,7 @@ This is a Virtual File System library based on gio and Glib.
 
 %prep
 %setup -q
+%patch0 -p1 -b .hidenfsmount
 
 %build
 %configure2_5x
