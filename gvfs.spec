@@ -1,6 +1,6 @@
 %define name gvfs
-%define version 0.1.7
-%define release %mkrel 2
+%define version 0.1.8
+%define release %mkrel 1
 
 %define major 0
 %define libname %mklibname %name %major
@@ -11,8 +11,6 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
-# (fc) 0.1.7-2mdv hide nfs mount point (Mdv bug #37091) (SVN)
-Patch0: gvfs-0.1.7-hidenfsmount.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -22,7 +20,7 @@ BuildRequires: libcdio-devel
 BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
 BuildRequires: libsoup-devel >= 2.3
-BuildRequires: glib2-devel >= 2.15.5
+BuildRequires: glib2-devel >= 2.15.6
 BuildRequires: libGConf2-devel
 BuildRequires: perl-XML-Parser
 #gw the dbus service depends on the daemon in the library package
@@ -50,7 +48,6 @@ This is a Virtual File System library based on gio and Glib.
 
 %prep
 %setup -q
-%patch0 -p1 -b .hidenfsmount
 
 %build
 %configure2_5x
@@ -71,6 +68,7 @@ rm -rf %{buildroot}
 
 %files -f gvfs.lang
 %defattr(-,root,root)
+%_sysconfdir/profile.d/gvfs-bash-completion.sh
 %_bindir/gvfs-*
 %_datadir/dbus-1/services/gvfs-daemon.service
 %dir %_datadir/gvfs
