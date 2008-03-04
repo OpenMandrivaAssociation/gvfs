@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 0.1.11
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
@@ -29,6 +29,7 @@ BuildRequires: avahi-glib-devel
 BuildRequires: avahi-client-devel
 BuildRequires: bluez-devel
 BuildRequires: dbus-glib-devel
+BuildRequires: expat-devel
 BuildRequires: gtk-doc
 BuildRequires: intltool
 #gw the dbus service depends on the daemon in the library package
