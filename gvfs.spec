@@ -1,5 +1,5 @@
 %define name gvfs
-%define version 0.1.9
+%define version 0.1.11
 %define release %mkrel 1
 
 %define major 0
@@ -27,6 +27,8 @@ BuildRequires: gphoto2-devel
 BuildRequires: gnome-keyring-devel
 BuildRequires: avahi-glib-devel
 BuildRequires: avahi-client-devel
+BuildRequires: bluez-devel
+BuildRequires: dbus-glib-devel
 BuildRequires: gtk-doc
 BuildRequires: intltool
 #gw the dbus service depends on the daemon in the library package
