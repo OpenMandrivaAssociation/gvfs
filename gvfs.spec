@@ -1,6 +1,6 @@
 %define name gvfs
-%define version 0.2.0.1
-%define release %mkrel 2
+%define version 0.2.1
+%define release %mkrel 1
 
 %define major 0
 %define libname %mklibname %name %major
@@ -13,8 +13,6 @@ Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 # (fc) 0.1.11-3mdv allow to show mount points in /mnt if they are ntfs or vfat
 Patch1: gvfs-0.1.11-showmnt.patch
-# (fc) 0.2.0.1-2mdv lot of bug fixes from SVN
-Patch2: gvfs-0.2.0.1-svnfixes.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -25,6 +23,10 @@ BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
 BuildRequires: libsoup-devel >= 2.3
 BuildRequires: glib2-devel >= 2.15.6
+#gw too late for 2008.1
+%if %mdkversion > 200810
+BuildRequires: libarchive-devel
+%endif
 BuildRequires: libGConf2-devel
 BuildRequires: perl-XML-Parser
 BuildRequires: gphoto2-devel
@@ -62,7 +64,6 @@ This is a Virtual File System library based on gio and Glib.
 %prep
 %setup -q
 %patch1 -p1 -b .showmnt
-%patch2 -p1 -b .svnfixes
 
 %build
 %configure2_5x
