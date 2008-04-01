@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 0.2.2
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
@@ -13,6 +13,10 @@ Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 # (fc) 0.1.11-3mdv allow to show mount points in /mnt if they are ntfs or vfat
 Patch1: gvfs-0.1.11-showmnt.patch
+# (fc) 0.2.2-2mdv unmount ejected volumes when they are in fstab (Mdv bug #39540)
+Patch2: gvfs-0.2.2-umountfstab.patch
+# (fc) 0.2.2-2mdv various fixes from SVN
+Patch3: gvfs-0.2.2-svnfixes.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -64,6 +68,8 @@ This is a Virtual File System library based on gio and Glib.
 %prep
 %setup -q
 %patch1 -p1 -b .showmnt
+%patch2 -p1 -b .unmountfstab
+%patch3 -p1 -b .svnfixes
 
 %build
 %configure2_5x
