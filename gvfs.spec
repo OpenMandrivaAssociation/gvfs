@@ -13,6 +13,8 @@ Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 # (fc) 0.1.11-3mdv allow to show mount points in /mnt if they are ntfs or vfat
 Patch1: gvfs-0.1.11-showmnt.patch
+# (fc) 0.2.3-4mdv various SVN fixes
+Patch2: gvfs-0.2.3-svnfixes.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -64,6 +66,7 @@ This is a Virtual File System library based on gio and Glib.
 %prep
 %setup -q
 %patch1 -p1 -b .showmnt
+%patch2 -p1 -b .svnfixes
 
 %build
 %configure2_5x
