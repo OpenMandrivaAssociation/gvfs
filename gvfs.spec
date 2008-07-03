@@ -1,5 +1,5 @@
 %define name gvfs
-%define version 0.2.5
+%define version 0.99.1
 %define release %mkrel 1
 
 %define major 0
@@ -37,7 +37,6 @@ BuildRequires: bluez-devel
 BuildRequires: dbus-glib-devel
 BuildRequires: expat-devel
 BuildRequires: gtk-doc
-BuildRequires: intltool
 #gw the dbus service depends on the daemon in the library package
 Requires: %libname = %version
 
