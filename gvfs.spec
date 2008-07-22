@@ -1,5 +1,5 @@
 %define name gvfs
-%define version 0.99.1
+%define version 0.99.2
 %define release %mkrel 1
 
 %define major 0
@@ -22,7 +22,7 @@ BuildRequires: libcdio-devel
 BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
 BuildRequires: libsoup-devel >= 2.3
-BuildRequires: glib2-devel >= 2.15.6
+BuildRequires: glib2-devel >= 2.17.4
 #gw too late for 2008.1
 %if %mdkversion > 200810
 BuildRequires: libarchive-devel
@@ -62,6 +62,7 @@ This is a Virtual File System library based on gio and Glib.
 
 %prep
 %setup -q
+cd monitor
 %patch1 -p1 -b .showmnt
 
 %build
@@ -90,17 +91,23 @@ rm -rf %{buildroot}
 %_sysconfdir/profile.d/gvfs-bash-completion.sh
 %_bindir/gvfs-*
 %_datadir/dbus-1/services/gvfs-daemon.service
+%_datadir/dbus-1/services/org.gtk.Private.GPhoto2VolumeMonitor.service
+%_datadir/dbus-1/services/org.gtk.Private.HalVolumeMonitor.service
 %dir %_datadir/gvfs
 %dir %_datadir/gvfs/mounts
+%dir %_datadir/gvfs/remote-volume-monitors
+%_datadir/gvfs/remote-volume-monitors/*.monitor
 %_datadir/gvfs/mounts/*.mount
 
 %files -n %libname
 %defattr(-,root,root)
 %_libdir/gio/modules/libgiogconf.so
-%_libdir/gio/modules/libgiohal-volume-monitor.so
+%_libdir/gio/modules/libgioremote-volume-monitor.so
 %_libdir/gio/modules/libgvfsdbus.so
-%_libdir/gvfs-fuse-daemon
-%_libdir/gvfsd*
+%_libexecdir/gvfs-fuse-daemon
+%_libexecdir/gvfs-gphoto2-volume-monitor
+%_libexecdir/gvfs-hal-volume-monitor
+%_libexecdir/gvfsd*
 %_libdir/libgvfscommon.so.%{major}*
 
 %files -n %develname
