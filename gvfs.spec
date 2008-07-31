@@ -1,10 +1,12 @@
 %define name gvfs
 %define version 0.99.3
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
 %define develname %mklibname -d %name
+
+%define enable_gphoto2 0
 
 Summary: Glib VFS library
 Name: %{name}
@@ -29,7 +31,9 @@ BuildRequires: libarchive-devel
 %endif
 BuildRequires: libGConf2-devel
 BuildRequires: intltool
+%if %{enable_gphoto2}
 BuildRequires: gphoto2-devel
+%endif
 BuildRequires: gnome-keyring-devel
 BuildRequires: avahi-glib-devel
 BuildRequires: avahi-client-devel
@@ -66,7 +70,13 @@ cd monitor
 %patch1 -p1 -b .showmnt
 
 %build
-%configure2_5x
+%configure2_5x \
+%if %{enable_gphoto2}
+ --enable-gphoto2
+%else
+ --disable-gphoto2
+%endif
+
 %make
 
 %install
@@ -91,7 +101,9 @@ rm -rf %{buildroot}
 %_sysconfdir/profile.d/gvfs-bash-completion.sh
 %_bindir/gvfs-*
 %_datadir/dbus-1/services/gvfs-daemon.service
+%if %{enable_gphoto2}
 %_datadir/dbus-1/services/org.gtk.Private.GPhoto2VolumeMonitor.service
+%endif
 %_datadir/dbus-1/services/org.gtk.Private.HalVolumeMonitor.service
 %dir %_datadir/gvfs
 %dir %_datadir/gvfs/mounts
@@ -105,7 +117,9 @@ rm -rf %{buildroot}
 %_libdir/gio/modules/libgioremote-volume-monitor.so
 %_libdir/gio/modules/libgvfsdbus.so
 %_libexecdir/gvfs-fuse-daemon
+%if %{enable_gphoto2}
 %_libexecdir/gvfs-gphoto2-volume-monitor
+%endif
 %_libexecdir/gvfs-hal-volume-monitor
 %_libexecdir/gvfsd*
 %_libdir/libgvfscommon.so.%{major}*
