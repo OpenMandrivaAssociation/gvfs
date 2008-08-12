@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 0.99.4
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
@@ -43,6 +43,7 @@ BuildRequires: expat-devel
 BuildRequires: gtk-doc
 #gw the dbus service depends on the daemon in the library package
 Requires: %libname = %version
+Requires: gnome-mount
 
 %description
 This is a Virtual File System library based on gio and Glib.
