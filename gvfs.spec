@@ -1,6 +1,6 @@
 %define name gvfs
-%define version 0.99.4
-%define release %mkrel 2
+%define version 0.99.5
+%define release %mkrel 1
 
 %define major 0
 %define libname %mklibname %name %major
