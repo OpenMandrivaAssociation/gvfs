@@ -6,7 +6,7 @@
 %define libname %mklibname %name %major
 %define develname %mklibname -d %name
 
-%define enable_gphoto2 1
+%define enable_gphoto2 0
 
 Summary: Glib VFS library
 Name: %{name}
