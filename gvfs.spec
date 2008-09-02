@@ -1,6 +1,6 @@
 %define name gvfs
-%define version 0.99.5
-%define release %mkrel 2
+%define version 0.99.6
+%define release %mkrel 1
 
 %define major 0
 %define libname %mklibname %name %major
@@ -15,9 +15,6 @@ Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 # (fc) 0.1.11-3mdv allow to show mount points in /mnt if they are ntfs or vfat
 Patch1: gvfs-0.1.11-showmnt.patch
-# (fc) 0.99.5-2mdv fix LUKS mounting (Fedora bug #460223) (SVN)
-Patch2: gvfs-0.99.5-fixluksmount.patch
-
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -73,7 +70,7 @@ This is a Virtual File System library based on gio and Glib.
 cd monitor
 %patch1 -p1 -b .showmnt
 cd -
-%patch2 -p1 -b .fixluksmount
+
 
 %build
 %configure2_5x \
