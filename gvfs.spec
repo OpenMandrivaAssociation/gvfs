@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 0.99.6
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
@@ -23,7 +23,7 @@ BuildRequires: libhal-devel
 BuildRequires: libcdio-devel
 BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
-BuildRequires: libsoup-devel >= 2.3
+BuildRequires: libsoup-devel >= 2.23.91
 BuildRequires: glib2-devel >= 2.17.6
 #gw too late for 2008.1
 %if %mdkversion > 200810
