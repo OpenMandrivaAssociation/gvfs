@@ -1,5 +1,5 @@
 %define name gvfs
-%define version 1.0.3
+%define version 1.1.1
 %define release %mkrel 1
 
 %define major 0
@@ -13,6 +13,7 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
+Patch: gvfs-1.1.1-fix-linking.patch
 # (fc) 0.1.11-3mdv allow to show mount points in /mnt if they are ntfs or vfat
 Patch1: gvfs-0.1.11-showmnt.patch
 License: LGPLv2+
@@ -24,7 +25,7 @@ BuildRequires: libcdio-devel
 BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
 BuildRequires: libsoup-devel >= 2.23.91
-BuildRequires: glib2-devel >= 2.17.6
+BuildRequires: glib2-devel >= 2.19.1
 #gw too late for 2008.1
 %if %mdkversion > 200810
 BuildRequires: libarchive-devel
@@ -67,6 +68,8 @@ This is a Virtual File System library based on gio and Glib.
 
 %prep
 %setup -q
+%patch -p1
+autoreconf
 cd monitor
 %patch1 -p1 -b .showmnt
 cd -
@@ -79,7 +82,9 @@ cd -
  --disable-gphoto2
 %endif
 
-%make
+#parallel build does not work
+#http://bugzilla.gnome.org/show_bug.cgi?id=562955
+make
 
 %install
 rm -rf %{buildroot}
@@ -125,6 +130,7 @@ rm -rf %{buildroot}
 %_libexecdir/gvfs-hal-volume-monitor
 %_libexecdir/gvfsd*
 %_libdir/libgvfscommon.so.%{major}*
+%_libdir/libgvfscommon-dnssd.so.%{major}*
 
 %files -n %develname
 %defattr(-,root,root)
