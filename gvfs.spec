@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 1.1.3
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
@@ -13,6 +13,7 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
+Source1: bash-completion
 Patch: gvfs-1.1.3-fix-linking.patch
 # (fc) 0.1.11-3mdv allow to show mount points in /mnt if they are ntfs or vfat
 Patch1: gvfs-0.1.11-showmnt.patch
@@ -94,6 +95,12 @@ rm -f %buildroot%_libdir/gio/modules/*.la
 
 %find_lang gvfs
 
+# upstream bash completion is installed in the wrong place, with the wrong perms
+# and redefine system variables without notice
+rm -f %buildroot%_sysconfdir/profile.d/gvfs-bash-completion.sh
+install -d -m 755 %buildroot%_sysconfdir/bash_completion.d
+install -m 644 %{SOURCE1} %buildroot%_sysconfdir/bash_completion.d/%{name}
+
 %clean
 rm -rf %{buildroot}
 
@@ -106,7 +113,7 @@ rm -rf %{buildroot}
 
 %files -f gvfs.lang
 %defattr(-,root,root)
-%_sysconfdir/profile.d/gvfs-bash-completion.sh
+%_sysconfdir/bash_completion.d/gvfs
 %_bindir/gvfs-*
 %_datadir/dbus-1/services/gvfs-daemon.service
 %if %{enable_gphoto2}
