@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 1.2.2
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
@@ -45,6 +45,13 @@ BuildRequires: gtk-doc
 #gw the dbus service depends on the daemon in the library package
 Requires: %libname = %version
 Requires: gnome-mount
+Suggests: %name-fuse
+Suggests: %name-smb
+Suggests: %name-archive
+#Suggests: %name-obexftp
+%if %{enable_gphoto2}
+Suggests: %name-gphoto2
+%endif
 
 %description
 This is a Virtual File System library based on gio and Glib.
@@ -65,6 +72,56 @@ Provides: libgvfs-devel = %version-%release
 
 %description -n %develname
 This is a Virtual File System library based on gio and Glib.
+
+%package fuse
+Summary: FUSE support for gvfs
+Group: System/Libraries
+Requires: %{name} = %{version}-%{release}
+
+%description fuse
+This package provides support for applications not using gio
+to access the gvfs filesystems.
+
+
+%package smb
+Summary: Windows fileshare support for gvfs
+Group: System/Libraries
+Requires: %{name} = %{version}-%{release}
+
+%description smb
+This package provides support for reading and writing files on windows
+shares (SMB) to applications using gvfs.
+
+%package archive
+Summary: Archiving support for gvfs
+Group: System/Libraries
+Requires: %{name} = %{version}-%{release}
+
+%description archive
+This package provides support for accessing files inside Zip and Tar archives,
+as well as ISO images, to applications using gvfs.
+
+
+%package obexftp
+Summary: ObexFTP support for gvfs
+Group: System/Libraries
+Requires: %{name} = %{version}-%{release}
+Requires: obex-data-server >= 0.3.4-6
+
+%description obexftp
+This package provides support for reading files on Bluetooth mobile phones
+and devices through ObexFTP to applications using gvfs.
+
+%package gphoto2
+Summary: gphoto2 support for gvfs
+Group: System/Libraries
+Requires: %{name} = %{version}-%{release}
+
+%description gphoto2
+This package provides support for reading and writing files on
+PTP based cameras (Picture Transfer Protocol) and MTP based
+media players (Media Transfer Protocol) to applications using gvfs.
+
 
 %prep
 %setup -q
@@ -112,27 +169,44 @@ rm -rf %{buildroot}
 %_sysconfdir/bash_completion.d/gvfs
 %_bindir/gvfs-*
 %_datadir/dbus-1/services/gvfs-daemon.service
-%if %{enable_gphoto2}
-%_datadir/dbus-1/services/org.gtk.Private.GPhoto2VolumeMonitor.service
-%endif
 %_datadir/dbus-1/services/org.gtk.Private.HalVolumeMonitor.service
 %dir %_datadir/gvfs
 %dir %_datadir/gvfs/mounts
 %dir %_datadir/gvfs/remote-volume-monitors
-%_datadir/gvfs/remote-volume-monitors/*.monitor
-%_datadir/gvfs/mounts/*.mount
+%_datadir/gvfs/remote-volume-monitors/hal.monitor
+#%_datadir/gvfs/remote-volume-monitors/gdu.monitor
+%_datadir/gvfs/mounts/sftp.mount
+%_datadir/gvfs/mounts/trash.mount
+%_datadir/gvfs/mounts/cdda.mount
+%_datadir/gvfs/mounts/computer.mount
+%_datadir/gvfs/mounts/dav.mount
+%_datadir/gvfs/mounts/dav+sd.mount
+%_datadir/gvfs/mounts/http.mount
+%_datadir/gvfs/mounts/localtest.mount
+%_datadir/gvfs/mounts/burn.mount
+%_datadir/gvfs/mounts/dns-sd.mount
+%_datadir/gvfs/mounts/network.mount
+%_datadir/gvfs/mounts/ftp.mount
 
 %files -n %libname
 %defattr(-,root,root)
 %_libdir/gio/modules/libgiogconf.so
 %_libdir/gio/modules/libgioremote-volume-monitor.so
 %_libdir/gio/modules/libgvfsdbus.so
-%_libexecdir/gvfs-fuse-daemon
-%if %{enable_gphoto2}
-%_libexecdir/gvfs-gphoto2-volume-monitor
-%endif
+#%_libexecdir/gvfs-gdu-volume-monitor
 %_libexecdir/gvfs-hal-volume-monitor
-%_libexecdir/gvfsd*
+%_libexecdir/gvfsd
+%_libexecdir/gvfsd-ftp
+%_libexecdir/gvfsd-sftp
+%_libexecdir/gvfsd-trash
+%_libexecdir/gvfsd-cdda
+%_libexecdir/gvfsd-computer
+%_libexecdir/gvfsd-dav
+%_libexecdir/gvfsd-http
+%_libexecdir/gvfsd-localtest
+%_libexecdir/gvfsd-burn
+%_libexecdir/gvfsd-dnssd
+%_libexecdir/gvfsd-network
 %_libdir/libgvfscommon.so.%{major}*
 %_libdir/libgvfscommon-dnssd.so.%{major}*
 
@@ -146,3 +220,37 @@ rm -rf %{buildroot}
 #%_libdir/pkgconfig/%name*.pc
 #%doc %_datadir/gtk-doc/html/%name
 
+%files fuse
+%defattr(-, root, root, -)
+%{_libexecdir}/gvfs-fuse-daemon
+
+
+%files smb
+%defattr(-, root, root, -)
+%{_libexecdir}/gvfsd-smb
+%{_libexecdir}/gvfsd-smb-browse
+%{_datadir}/gvfs/mounts/smb-browse.mount
+%{_datadir}/gvfs/mounts/smb.mount
+
+
+%files archive
+%defattr(-, root, root, -)
+#%dir %{_datadir}/applications/mount-archive.desktop
+%{_libexecdir}/gvfsd-archive
+%{_datadir}/gvfs/mounts/archive.mount
+
+
+%files obexftp
+%defattr(-, root, root, -)
+%{_libexecdir}/gvfsd-obexftp
+%{_datadir}/gvfs/mounts/obexftp.mount
+
+%if %{enable_gphoto2}
+%files gphoto2
+%defattr(-, root, root, -)
+%{_libexecdir}/gvfsd-gphoto2
+%{_datadir}/gvfs/mounts/gphoto2.mount
+%{_libexecdir}/gvfs-gphoto2-volume-monitor
+%{_datadir}/dbus-1/services/org.gtk.Private.GPhoto2VolumeMonitor.service
+%{_datadir}/gvfs/remote-volume-monitors/gphoto2.monitor
+%endif
