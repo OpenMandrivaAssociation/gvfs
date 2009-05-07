@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 1.2.2
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define major 0
 %define libname %mklibname %name %major
@@ -77,6 +77,7 @@ This is a Virtual File System library based on gio and Glib.
 Summary: FUSE support for gvfs
 Group: System/Libraries
 Requires: %{name} = %{version}-%{release}
+Requires: fuse
 
 %description fuse
 This package provides support for applications not using gio
