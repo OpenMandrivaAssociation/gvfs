@@ -1,5 +1,5 @@
 %define name gvfs
-%define version 1.2.3
+%define version 1.3.1
 %define release %mkrel 1
 
 %define major 0
@@ -25,7 +25,7 @@ BuildRequires: libcdio-devel
 BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
 BuildRequires: libsoup-devel >= 2.23.91
-BuildRequires: glib2-devel >= 2.19.1
+BuildRequires: glib2-devel >= 2.21.2
 #gw too late for 2008.1
 %if %mdkversion > 200810
 BuildRequires: libarchive-devel
