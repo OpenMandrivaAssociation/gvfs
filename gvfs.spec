@@ -1,5 +1,5 @@
 %define name gvfs
-%define version 1.3.1
+%define version 1.3.2
 %define release %mkrel 1
 
 %define major 0
@@ -170,6 +170,7 @@ rm -rf %{buildroot}
 %_sysconfdir/bash_completion.d/gvfs
 %_bindir/gvfs-*
 %_datadir/dbus-1/services/gvfs-daemon.service
+%_datadir/dbus-1/services/gvfs-metadata.service
 %_datadir/dbus-1/services/org.gtk.Private.HalVolumeMonitor.service
 %dir %_datadir/gvfs
 %dir %_datadir/gvfs/mounts
@@ -198,6 +199,7 @@ rm -rf %{buildroot}
 %_libexecdir/gvfs-hal-volume-monitor
 %_libexecdir/gvfsd
 %_libexecdir/gvfsd-ftp
+%_libexecdir/gvfsd-metadata
 %_libexecdir/gvfsd-sftp
 %_libexecdir/gvfsd-trash
 %_libexecdir/gvfsd-cdda
