@@ -23,7 +23,7 @@ Group: System/Libraries
 Url: http://www.gnome.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: libhal-devel
-BuildRequires: libgudev1.0-devel
+BuildRequires: libgudev-devel
 BuildRequires: libcdio-devel
 BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
