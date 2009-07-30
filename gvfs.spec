@@ -1,12 +1,14 @@
 %define name gvfs
 %define version 1.3.3
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
 %define develname %mklibname -d %name
 
-%define enable_gphoto2 0
+%define enable_gphoto2 1
+
+%define enable_gdu 0
 
 Summary: Glib VFS library
 Name: %{name}
@@ -21,6 +23,7 @@ Group: System/Libraries
 Url: http://www.gnome.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 BuildRequires: libhal-devel
+BuildRequires: libgudev1.0-devel
 BuildRequires: libcdio-devel
 BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
@@ -42,6 +45,9 @@ BuildRequires: bluez-devel
 BuildRequires: dbus-glib-devel
 BuildRequires: expat-devel
 BuildRequires: gtk-doc
+%if %{enable_gdu}
+BuildRequires: libgdu-devel >= 0.4
+%endif
 #gw the dbus service depends on the daemon in the library package
 Requires: %libname = %version
 Requires: gnome-mount
@@ -50,7 +56,7 @@ Suggests: %name-smb
 Suggests: %name-archive
 #Suggests: %name-obexftp
 %if %{enable_gphoto2}
-Suggests: %name-gphoto2
+#Suggests: %name-gphoto2
 %endif
 
 %description
@@ -138,9 +144,7 @@ cd -
  --disable-gphoto2
 %endif
 
-#parallel build does not work
-#http://bugzilla.gnome.org/show_bug.cgi?id=562955
-make
+%make
 
 %install
 rm -rf %{buildroot}
@@ -172,11 +176,16 @@ rm -rf %{buildroot}
 %_datadir/dbus-1/services/gvfs-daemon.service
 %_datadir/dbus-1/services/gvfs-metadata.service
 %_datadir/dbus-1/services/org.gtk.Private.HalVolumeMonitor.service
+%if %{enable_gdu}
+%_datadir/dbus-1/services/org.gtk.Private.GduVolumeMonitor.service
+%endif
 %dir %_datadir/gvfs
 %dir %_datadir/gvfs/mounts
 %dir %_datadir/gvfs/remote-volume-monitors
 %_datadir/gvfs/remote-volume-monitors/hal.monitor
-#%_datadir/gvfs/remote-volume-monitors/gdu.monitor
+%if %{enable_gdu}
+%_datadir/gvfs/remote-volume-monitors/gdu.monitor
+%endif
 %_datadir/gvfs/mounts/sftp.mount
 %_datadir/gvfs/mounts/trash.mount
 %_datadir/gvfs/mounts/cdda.mount
@@ -195,7 +204,9 @@ rm -rf %{buildroot}
 %_libdir/gio/modules/libgiogconf.so
 %_libdir/gio/modules/libgioremote-volume-monitor.so
 %_libdir/gio/modules/libgvfsdbus.so
-#%_libexecdir/gvfs-gdu-volume-monitor
+%if %{enable_gdu}
+%_libexecdir/gvfs-gdu-volume-monitor
+%endif
 %_libexecdir/gvfs-hal-volume-monitor
 %_libexecdir/gvfsd
 %_libexecdir/gvfsd-ftp
