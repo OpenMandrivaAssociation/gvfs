@@ -1,13 +1,13 @@
 %define name gvfs
 %define version 1.3.4
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
 %define develname %mklibname -d %name
 
 %define enable_gphoto2 1
-%define enable_iphone 0
+%define enable_iphone 1
 
 %define enable_gdu 0
 
