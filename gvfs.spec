@@ -7,6 +7,7 @@
 %define develname %mklibname -d %name
 
 %define enable_gphoto2 1
+%define enable_iphone 0
 
 %define enable_gdu 0
 
@@ -16,6 +17,7 @@ Version: %{version}
 Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 Source1: bash-completion
+Patch: 0001-Add-AFC-backend.patch
 # (fc) 0.1.11-3mdv allow to show mount points in /mnt if they are ntfs or vfat
 Patch1: gvfs-0.1.11-showmnt.patch
 License: LGPLv2+
@@ -37,6 +39,9 @@ BuildRequires: libGConf2-devel
 BuildRequires: intltool
 %if %{enable_gphoto2}
 BuildRequires: gphoto2-devel
+%endif
+%if %{enable_iphone}
+BuildRequires: libiphone-devel
 %endif
 BuildRequires: gnome-keyring-devel
 BuildRequires: avahi-glib-devel
@@ -129,12 +134,23 @@ This package provides support for reading and writing files on
 PTP based cameras (Picture Transfer Protocol) and MTP based
 media players (Media Transfer Protocol) to applications using gvfs.
 
+%package iphone
+Summary: iphone support for gvfs
+Group: System/Libraries
+Requires: %{name} = %{version}-%{release}
+
+%description iphone
+This package provides support for reading and writing files on
+the iPhone and the iPod TouchP to applications using gvfs.
+
 
 %prep
 %setup -q
+%patch -p1
 cd monitor
 %patch1 -p1 -b .showmnt
 cd -
+autoreconf -fi
 
 %build
 %configure2_5x \
@@ -267,4 +283,14 @@ rm -rf %{buildroot}
 %{_libexecdir}/gvfs-gphoto2-volume-monitor
 %{_datadir}/dbus-1/services/org.gtk.Private.GPhoto2VolumeMonitor.service
 %{_datadir}/gvfs/remote-volume-monitors/gphoto2.monitor
+%endif
+
+%if %{enable_iphone}
+%files iphone
+%defattr(-, root, root, -)
+%_libexecdir/gvfs-afc-volume-monitor
+%_libexecdir/gvfsd-afc
+%_datadir/dbus-1/services/org.gtk.Private.AfcVolumeMonitor.service
+%_datadir/gvfs/mounts/afc.mount
+%_datadir/gvfs/remote-volume-monitors/afc.monitor
 %endif
