@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 1.3.6
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
@@ -55,7 +55,7 @@ BuildRequires: libgdu-devel >= 0.4
 %endif
 #gw the dbus service depends on the daemon in the library package
 Requires: %libname = %version
-Requires: gnome-mount
+Suggests: gnome-mount
 Suggests: %name-fuse
 Suggests: %name-smb
 Suggests: %name-archive
