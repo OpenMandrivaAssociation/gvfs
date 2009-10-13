@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 1.4.0
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define major 0
 %define libname %mklibname %name %major
@@ -20,6 +20,8 @@ Source1: bash-completion
 Patch: 0001-Add-AFC-backend.patch
 # (fc) 0.1.11-3mdv allow to show mount points in /mnt if they are ntfs or vfat
 Patch1: gvfs-0.1.11-showmnt.patch
+# (fc) 1.4.0-3mdv fix MTP device detection (GIT) (GNOME bug #597585)
+Patch2: 01_mtp_content_types.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -150,6 +152,7 @@ the iPhone and the iPod TouchP to applications using gvfs.
 cd monitor
 %patch1 -p1 -b .showmnt
 cd -
+%patch2 -p1 -b .mtp
 autoreconf -fi
 
 %build
