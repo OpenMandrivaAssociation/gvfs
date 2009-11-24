@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 1.5.1
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
@@ -17,7 +17,6 @@ Version: %{version}
 Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 Source1: bash-completion
-Patch0: gvfs-1.5.1-fix-compilation-with-libiphone-0.9.4.patch
 # (fc) 0.1.11-3mdv allow to show mount points in /mnt if they are ntfs or vfat
 Patch1: gvfs-0.1.11-showmnt.patch
 License: LGPLv2+
@@ -146,7 +145,6 @@ the iPhone and the iPod TouchP to applications using gvfs.
 
 %prep
 %setup -q
-%patch0 -p1
 cd monitor
 %patch1 -p1 -b .showmnt
 cd -
