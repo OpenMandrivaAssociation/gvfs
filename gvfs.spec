@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 1.5.1
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define major 0
 %define libname %mklibname %name %major
@@ -42,7 +42,7 @@ BuildRequires: gphoto2-devel
 %if %{enable_iphone}
 BuildRequires: libiphone-devel
 %endif
-BuildRequires: gnome-keyring-devel
+BuildRequires: libgnome-keyring-devel
 BuildRequires: avahi-glib-devel
 BuildRequires: avahi-client-devel
 BuildRequires: bluez-devel
