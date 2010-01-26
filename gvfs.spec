@@ -1,6 +1,6 @@
 %define name gvfs
-%define version 1.5.1
-%define release %mkrel 3
+%define version 1.5.2
+%define release %mkrel 1
 
 %define major 0
 %define libname %mklibname %name %major
@@ -29,7 +29,7 @@ BuildRequires: libcdio-devel
 BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
 BuildRequires: libsoup-devel >= 2.23.91
-BuildRequires: glib2-devel >= 2.21.5
+BuildRequires: glib2-devel >= 2.23.2
 #gw too late for 2008.1
 %if %mdkversion > 200810
 BuildRequires: libarchive-devel
@@ -70,6 +70,8 @@ This is a Virtual File System library based on gio and Glib.
 Group: System/Libraries
 Summary: Glib VFS library
 Requires: %name >= %version
+Requires(post): glib2.0-common >= 2.23.2
+Requires(postun): glib2.0-common >= 2.23.2
 
 %description -n %{libname}
 This is a Virtual File System library based on gio and Glib.
@@ -175,12 +177,20 @@ install -m 644 %{SOURCE1} %buildroot%_sysconfdir/bash_completion.d/%{name}
 %clean
 rm -rf %{buildroot}
 
-%if %mdkversion < 200900
-%post -n %libname -p /sbin/ldconfig
+%post -n %libname
+%if %_lib != lib
+ %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules 
+%else
+ %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
 %endif
-%if %mdkversion < 200900
-%postun -n %libname -p /sbin/ldconfig
+
+%postun -n %libname
+%if %_lib != lib
+ %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules 
+%else
+ %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
 %endif
+
 
 %files -f gvfs.lang
 %defattr(-,root,root)
