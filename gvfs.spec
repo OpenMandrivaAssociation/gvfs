@@ -1,5 +1,5 @@
 %define name gvfs
-%define version 1.5.3
+%define version 1.5.4
 %define release %mkrel 1
 
 %define major 0
@@ -29,7 +29,7 @@ BuildRequires: libcdio-devel
 BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
 BuildRequires: libsoup-devel >= 2.23.91
-BuildRequires: glib2-devel >= 2.23.2
+BuildRequires: glib2-devel >= 2.23.4
 #gw too late for 2008.1
 %if %mdkversion > 200810
 BuildRequires: libarchive-devel
@@ -196,8 +196,6 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %_sysconfdir/bash_completion.d/gvfs
 %_bindir/gvfs-*
-%_datadir/dbus-1/services/gvfs-daemon.service
-%_datadir/dbus-1/services/gvfs-metadata.service
 %_datadir/dbus-1/services/org.gtk.Private.HalVolumeMonitor.service
 %if %{enable_gdu}
 %_datadir/dbus-1/services/org.gtk.Private.GduVolumeMonitor.service
