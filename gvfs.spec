@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 1.5.4
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
@@ -152,7 +152,7 @@ cd monitor
 cd -
 
 %build
-%configure2_5x \
+%configure2_5x --with-dbus-service-dir=%_datadir/dbus-1/services \
 %if %{enable_gphoto2}
  --enable-gphoto2
 %else
@@ -196,6 +196,8 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %_sysconfdir/bash_completion.d/gvfs
 %_bindir/gvfs-*
+%_datadir/dbus-1/services/gvfs-daemon.service
+%_datadir/dbus-1/services/gvfs-metadata.service
 %_datadir/dbus-1/services/org.gtk.Private.HalVolumeMonitor.service
 %if %{enable_gdu}
 %_datadir/dbus-1/services/org.gtk.Private.GduVolumeMonitor.service
