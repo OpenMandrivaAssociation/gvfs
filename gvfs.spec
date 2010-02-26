@@ -11,6 +11,8 @@
 
 %define enable_gdu 0
 
+%define giolibname %mklibname gio2.0_ 0
+
 Summary: Glib VFS library
 Name: %{name}
 Version: %{version}
@@ -70,8 +72,8 @@ This is a Virtual File System library based on gio and Glib.
 Group: System/Libraries
 Summary: Glib VFS library
 Requires: %name >= %version
-Requires(post): glib2.0-common >= 2.23.2
-Requires(postun): glib2.0-common >= 2.23.2
+Requires(post): %giolibname >= 2.23.4-2mdv
+Requires(postun): %giolibname >= 2.23.4-2mdv
 
 %description -n %{libname}
 This is a Virtual File System library based on gio and Glib.
@@ -185,12 +187,13 @@ rm -rf %{buildroot}
 %endif
 
 %postun -n %libname
+if [ "$1" = "0"]; then
 %if %_lib != lib
  %{_bindir}/gio-querymodules-64 %{_libdir}/gio/modules 
 %else
  %{_bindir}/gio-querymodules-32 %{_libdir}/gio/modules
 %endif
-
+fi
 
 %files -f gvfs.lang
 %defattr(-,root,root)
