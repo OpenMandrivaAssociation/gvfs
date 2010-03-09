@@ -25,7 +25,6 @@ License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
-BuildRequires: libhal-devel
 BuildRequires: libgudev-devel
 BuildRequires: libcdio-devel
 BuildRequires: fuse-devel
@@ -52,7 +51,9 @@ BuildRequires: dbus-glib-devel
 BuildRequires: expat-devel
 BuildRequires: gtk-doc
 %if %{enable_gdu}
-BuildRequires: libgdu-devel >= 0.4
+BuildRequires: libgdu-devel >= 2.29.0
+%else
+BuildRequires: libhal-devel
 %endif
 #gw the dbus service depends on the daemon in the library package
 Requires: %libname = %version
@@ -201,16 +202,18 @@ fi
 %_bindir/gvfs-*
 %_datadir/dbus-1/services/gvfs-daemon.service
 %_datadir/dbus-1/services/gvfs-metadata.service
-%_datadir/dbus-1/services/org.gtk.Private.HalVolumeMonitor.service
 %if %{enable_gdu}
 %_datadir/dbus-1/services/org.gtk.Private.GduVolumeMonitor.service
+%else
+%_datadir/dbus-1/services/org.gtk.Private.HalVolumeMonitor.service
 %endif
 %dir %_datadir/gvfs
 %dir %_datadir/gvfs/mounts
 %dir %_datadir/gvfs/remote-volume-monitors
-%_datadir/gvfs/remote-volume-monitors/hal.monitor
 %if %{enable_gdu}
 %_datadir/gvfs/remote-volume-monitors/gdu.monitor
+%else
+%_datadir/gvfs/remote-volume-monitors/hal.monitor
 %endif
 %_datadir/gvfs/mounts/sftp.mount
 %_datadir/gvfs/mounts/trash.mount
@@ -232,8 +235,9 @@ fi
 %_libdir/gio/modules/libgvfsdbus.so
 %if %{enable_gdu}
 %_libexecdir/gvfs-gdu-volume-monitor
-%endif
+%else
 %_libexecdir/gvfs-hal-volume-monitor
+%endif
 %_libexecdir/gvfsd
 %_libexecdir/gvfsd-ftp
 %_libexecdir/gvfsd-metadata
