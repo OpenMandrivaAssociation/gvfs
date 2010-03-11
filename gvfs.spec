@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 1.5.5
-%define release %mkrel 1
+%define release %mkrel 2
 
 %define major 0
 %define libname %mklibname %name %major
@@ -9,7 +9,7 @@
 %define enable_gphoto2 1
 %define enable_iphone 1
 
-%define enable_gdu 0
+%define enable_gdu 1
 
 %define giolibname %mklibname gio2.0_ 0
 
@@ -31,10 +31,7 @@ BuildRequires: fuse-devel
 BuildRequires: libsmbclient-devel
 BuildRequires: libsoup-devel >= 2.23.91
 BuildRequires: glib2-devel >= 2.23.4
-#gw too late for 2008.1
-%if %mdkversion > 200810
 BuildRequires: libarchive-devel
-%endif
 BuildRequires: libGConf2-devel
 BuildRequires: intltool
 %if %{enable_gphoto2}
