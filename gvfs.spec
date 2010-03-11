@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 1.5.5
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define major 0
 %define libname %mklibname %name %major
@@ -54,7 +54,6 @@ BuildRequires: libhal-devel
 %endif
 #gw the dbus service depends on the daemon in the library package
 Requires: %libname = %version
-Suggests: gnome-mount
 Suggests: %name-fuse
 Suggests: %name-smb
 Suggests: %name-archive
