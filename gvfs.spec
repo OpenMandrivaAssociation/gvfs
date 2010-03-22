@@ -37,7 +37,7 @@ BuildRequires: intltool
 BuildRequires: gphoto2-devel
 %endif
 %if %{enable_iphone}
-BuildRequires: libimobiledevice-devel
+BuildRequires: libimobiledevice-devel >= 1.0.0
 %endif
 BuildRequires: libgnome-keyring-devel
 BuildRequires: avahi-glib-devel
