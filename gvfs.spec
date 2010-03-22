@@ -19,8 +19,7 @@ Version: %{version}
 Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 Source1: bash-completion
-# (fc) 0.1.11-3mdv allow to show mount points in /mnt if they are ntfs or vfat
-Patch1: gvfs-0.1.11-showmnt.patch
+Patch2: gvfs-1.5.5-libimobiledevice_1_0_api.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
@@ -146,9 +145,7 @@ the iPhone and the iPod TouchP to applications using gvfs.
 
 %prep
 %setup -q
-cd monitor
-%patch1 -p1 -b .showmnt
-cd -
+%patch2 -p1 -b .libimobiledevice
 
 %build
 %configure2_5x --with-dbus-service-dir=%_datadir/dbus-1/services \
