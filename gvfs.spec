@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 1.5.5
-%define release %mkrel 4
+%define release %mkrel 5
 
 %define major 0
 %define libname %mklibname %name %major
@@ -19,6 +19,9 @@ Version: %{version}
 Release: %{release}
 Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%name/%{name}-%{version}.tar.bz2
 Source1: bash-completion
+#gw from Ubuntu, fix music player detection
+# https://bugs.freedesktop.org/show_bug.cgi?id=24500
+Patch0: gvfs-music-player-mimetype.patch
 Patch2: gvfs-1.5.5-libimobiledevice_1_0_api.patch
 License: LGPLv2+
 Group: System/Libraries
@@ -145,7 +148,7 @@ the iPhone and the iPod TouchP to applications using gvfs.
 
 %prep
 %setup -q
-%patch2 -p1 -b .libimobiledevice
+%apply_patches
 
 %build
 %configure2_5x --with-dbus-service-dir=%_datadir/dbus-1/services \
