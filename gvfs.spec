@@ -1,6 +1,6 @@
 %define name gvfs
-%define version 1.5.5
-%define release %mkrel 5
+%define version 1.6.0
+%define release %mkrel 1
 
 %define major 0
 %define libname %mklibname %name %major
@@ -22,7 +22,6 @@ Source1: bash-completion
 #gw from Ubuntu, fix music player detection
 # https://bugs.freedesktop.org/show_bug.cgi?id=24500
 Patch0: gvfs-music-player-mimetype.patch
-Patch2: gvfs-1.5.5-libimobiledevice_1_0_api.patch
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
