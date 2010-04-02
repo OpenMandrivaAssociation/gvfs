@@ -52,6 +52,7 @@ BuildRequires: gtk-doc
 BuildRequires: libgdu-devel >= 2.29.0
 %else
 BuildRequires: libhal-devel
+Suggests: gnome-mount
 %endif
 #gw the dbus service depends on the daemon in the library package
 Requires: %libname = %version
@@ -151,6 +152,9 @@ the iPhone and the iPod TouchP to applications using gvfs.
 
 %build
 %configure2_5x --with-dbus-service-dir=%_datadir/dbus-1/services \
+%if !%{enable_gdu}
+  --enable-hal  --disable-gdu \
+%endif
 %if %{enable_gphoto2}
  --enable-gphoto2
 %else
