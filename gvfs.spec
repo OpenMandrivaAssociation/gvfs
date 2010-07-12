@@ -1,5 +1,5 @@
 %define name gvfs
-%define version 1.6.2
+%define version 1.6.3
 %define release %mkrel 1
 
 %define major 0
