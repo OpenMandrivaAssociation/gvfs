@@ -1,6 +1,6 @@
 %define name gvfs
 %define version 1.6.4
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define major 0
 %define libname %mklibname %name %major
@@ -155,7 +155,7 @@ the iPhone and the iPod TouchP to applications using gvfs.
 %if !%{enable_gdu}
   --enable-hal  --disable-gdu \
 %endif
-  --disable-gconf \
+  --enable-gconf \
 %if %{enable_gphoto2}
  --enable-gphoto2
 %else
@@ -225,12 +225,12 @@ fi
 %_datadir/gvfs/mounts/localtest.mount
 %_datadir/gvfs/mounts/burn.mount
 %_datadir/gvfs/mounts/dns-sd.mount
-#%_datadir/gvfs/mounts/network.mount
+%_datadir/gvfs/mounts/network.mount
 %_datadir/gvfs/mounts/ftp.mount
 
 %files -n %libname
 %defattr(-,root,root)
-#%_libdir/gio/modules/libgiogconf.so
+%_libdir/gio/modules/libgiogconf.so
 %_libdir/gio/modules/libgioremote-volume-monitor.so
 %_libdir/gio/modules/libgvfsdbus.so
 %if %{enable_gdu}
@@ -250,7 +250,7 @@ fi
 %_libexecdir/gvfsd-localtest
 %_libexecdir/gvfsd-burn
 %_libexecdir/gvfsd-dnssd
-#%_libexecdir/gvfsd-network
+%_libexecdir/gvfsd-network
 %_libdir/libgvfscommon.so.%{major}*
 %_libdir/libgvfscommon-dnssd.so.%{major}*
 
