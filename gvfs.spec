@@ -1,6 +1,6 @@
 %define name gvfs
-%define version 1.6.4
-%define release %mkrel 3
+%define version 1.6.5
+%define release %mkrel 1
 
 %define major 0
 %define libname %mklibname %name %major
@@ -230,7 +230,6 @@ fi
 
 %files -n %libname
 %defattr(-,root,root)
-%_libdir/gio/modules/libgiogconf.so
 %_libdir/gio/modules/libgioremote-volume-monitor.so
 %_libdir/gio/modules/libgvfsdbus.so
 %if %{enable_gdu}
