@@ -19,6 +19,7 @@ Source1: bash-completion
 #gw from Ubuntu, fix music player detection
 # https://bugs.freedesktop.org/show_bug.cgi?id=24500
 Patch0: gvfs-music-player-mimetype.patch
+Patch1: gvfs-1.6.7_glibh.patch
 
 BuildRequires: libgudev-devel
 BuildRequires: libcdio-devel
