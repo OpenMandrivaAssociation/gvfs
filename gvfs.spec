@@ -226,6 +226,8 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/bash_completion.d/%{name}
 %{_libexecdir}/gvfsd-smb-browse
 %{_datadir}/gvfs/mounts/smb-browse.mount
 %{_datadir}/gvfs/mounts/smb.mount
+%{_datadir}/GConf/gsettings/gvfs-smb.convert
+%{_datadir}/glib-2.0/schemas/org.gnome.system.smb.gschema.xml
 
 %files archive
 %{_libexecdir}/gvfsd-archive
