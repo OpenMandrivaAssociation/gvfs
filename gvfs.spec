@@ -20,6 +20,7 @@ Source1: bash-completion
 Patch0: gvfs-music-player-mimetype.patch
 Patch1: gvfs-1.6.7_glibh.patch
 
+BuildRequires:	glib2.0-common
 BuildRequires:	intltool
 BuildRequires:	cdda-devel
 BuildRequires:	expat-devel
