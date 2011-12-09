@@ -5,50 +5,50 @@
 
 %define enable_gphoto2 1
 %define enable_iphone 1
-%define enable_gdu 1
 
 Summary: Glib VFS library
 Name: gvfs
-Version: 1.6.7
-Release: 4
+Version: 1.10.1
+Release: 1
 License: LGPLv2+
 Group: System/Libraries
 Url: http://www.gnome.org/
-Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.bz2
+Source0: ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 Source1: bash-completion
 #gw from Ubuntu, fix music player detection
 # https://bugs.freedesktop.org/show_bug.cgi?id=24500
 Patch0: gvfs-music-player-mimetype.patch
 Patch1: gvfs-1.6.7_glibh.patch
 
-BuildRequires: libgudev-devel
-BuildRequires: libcdio-devel
-BuildRequires: fuse-devel
-BuildRequires: libsmbclient-devel
-BuildRequires: libsoup-devel >= 2.23.91
-BuildRequires: glib2-devel >= 2.23.4
-BuildRequires: libarchive-devel
-BuildRequires: libGConf2-devel
-BuildRequires: intltool
+BuildRequires:	intltool
+BuildRequires:	cdda-devel
+BuildRequires:	expat-devel
+BuildRequires:	pkgconfig(glib-2.0) >= 2.31.0
+BuildRequires:	pkgconfig(gobject-2.0)
+BuildRequires:	pkgconfig(gmodule-no-export-2.0)
+BuildRequires:	pkgconfig(gio-unix-2.0)
+BuildRequires:	pkgconfig(gio-2.0)
+BuildRequires:	pkgconfig(dbus-1)
+BuildRequires:	pkgconfig(avahi-glib)
+BuildRequires:	pkgconfig(avahi-client)
+BuildRequires:	pkgconfig(smbclient)
+BuildRequires:	pkgconfig(libarchive)
+BuildRequires:	pkgconfig(fuse)
+BuildRequires:	pkgconfig(openobex)
+BuildRequires:	pkgconfig(gnome-keyring-1)
+BuildRequires:	pkgconfig(gdu)
+BuildRequires:	pkgconfig(libbluray)
+BuildRequires:	pkgconfig(libsoup-gnome-2.4) >= 2.26.0
+BuildRequires:	pkgconfig(libcdio_paranoia)
+BuildRequires:	pkgconfig(gudev-1.0)
 %if %{enable_gphoto2}
-BuildRequires: gphoto2-devel
+BuildRequires:	pkgconfig(libgphoto2)
 %endif
 %if %{enable_iphone}
-BuildRequires: libimobiledevice-devel >= 1.0.0
+BuildRequires:	pkgconfig(libimobiledevice-1.0) >= 1.1.0
+BuildRequires:	pkgconfig(libplist) >= 0.15
 %endif
-BuildRequires: libgnome-keyring-devel
-BuildRequires: avahi-glib-devel
-BuildRequires: avahi-client-devel
-BuildRequires: bluez-devel
-BuildRequires: dbus-glib-devel
-BuildRequires: expat-devel
-BuildRequires: gtk-doc
-%if %{enable_gdu}
-BuildRequires: libgdu-devel >= 2.29.0
-%else
-BuildRequires: libhal-devel
-Suggests: gnome-mount
-%endif
+
 Requires(post): %{gioname} >= 2.23.4-2
 Requires(postun): %{gioname} >= 2.23.4-2
 Suggests: %{name}-fuse
@@ -143,11 +143,6 @@ the iPhone and the iPod TouchP to applications using gvfs.
 %build
 %configure2_5x \
 	--with-dbus-service-dir=%{_datadir}/dbus-1/services \
-%if !%{enable_gdu}
-	--enable-hal \
-	--disable-gdu \
-%endif
-	--enable-gconf \
 %if %{enable_gphoto2}
 	--enable-gphoto2
 %else
@@ -173,51 +168,46 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/bash_completion.d/%{name}
 %{_bindir}/gvfs-*
 %{_libdir}/gio/modules/libgioremote-volume-monitor.so
 %{_libdir}/gio/modules/libgvfsdbus.so
-%if %{enable_gdu}
 %{_libexecdir}/gvfs-gdu-volume-monitor
-%else
-%{_libexecdir}/gvfs-hal-volume-monitor
-%endif
 %{_libexecdir}/gvfsd
-%{_libexecdir}/gvfsd-ftp
-%{_libexecdir}/gvfsd-metadata
-%{_libexecdir}/gvfsd-sftp
-%{_libexecdir}/gvfsd-trash
+%{_libexecdir}/gvfsd-afp
+%{_libexecdir}/gvfsd-afp-browse
+%{_libexecdir}/gvfsd-burn
 %{_libexecdir}/gvfsd-cdda
 %{_libexecdir}/gvfsd-computer
 %{_libexecdir}/gvfsd-dav
+%{_libexecdir}/gvfsd-dnssd
+%{_libexecdir}/gvfsd-ftp
 %{_libexecdir}/gvfsd-http
 %{_libexecdir}/gvfsd-localtest
-%{_libexecdir}/gvfsd-burn
-%{_libexecdir}/gvfsd-dnssd
+%{_libexecdir}/gvfsd-metadata
 %{_libexecdir}/gvfsd-network
+%{_libexecdir}/gvfsd-sftp
+%{_libexecdir}/gvfsd-trash
 %{_datadir}/dbus-1/services/gvfs-daemon.service
 %{_datadir}/dbus-1/services/gvfs-metadata.service
-%if %{enable_gdu}
 %{_datadir}/dbus-1/services/org.gtk.Private.GduVolumeMonitor.service
-%else
-%{_datadir}/dbus-1/services/org.gtk.Private.HalVolumeMonitor.service
-%endif
 %dir %{_datadir}/gvfs
 %dir %{_datadir}/gvfs/mounts
 %dir %{_datadir}/gvfs/remote-volume-monitors
-%if %{enable_gdu}
 %{_datadir}/gvfs/remote-volume-monitors/gdu.monitor
-%else
-%{_datadir}/gvfs/remote-volume-monitors/hal.monitor
-%endif
-%{_datadir}/gvfs/mounts/sftp.mount
-%{_datadir}/gvfs/mounts/trash.mount
+%{_datadir}/gvfs/mounts/afp-browse.mount
+%{_datadir}/gvfs/mounts/afp.mount
+%{_datadir}/gvfs/mounts/burn.mount
 %{_datadir}/gvfs/mounts/cdda.mount
 %{_datadir}/gvfs/mounts/computer.mount
 %{_datadir}/gvfs/mounts/dav.mount
 %{_datadir}/gvfs/mounts/dav+sd.mount
+%{_datadir}/gvfs/mounts/dns-sd.mount
+%{_datadir}/gvfs/mounts/ftp.mount
 %{_datadir}/gvfs/mounts/http.mount
 %{_datadir}/gvfs/mounts/localtest.mount
-%{_datadir}/gvfs/mounts/burn.mount
-%{_datadir}/gvfs/mounts/dns-sd.mount
 %{_datadir}/gvfs/mounts/network.mount
-%{_datadir}/gvfs/mounts/ftp.mount
+%{_datadir}/gvfs/mounts/sftp.mount
+%{_datadir}/gvfs/mounts/trash.mount
+%{_datadir}/GConf/gsettings/gvfs-dns-sd.convert
+%{_datadir}/glib-2.0/schemas/org.gnome.system.dns_sd.gschema.xml
+%{_datadir}/glib-2.0/schemas/org.gnome.system.gvfs.enums.xml
 
 %files -n %{libname}
 %{_libdir}/libgvfscommon.so.%{major}*
@@ -226,10 +216,7 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/bash_completion.d/%{name}
 %files -n %{develname}
 %doc NEWS ChangeLog AUTHORS TODO
 %{_libdir}/lib*.so
-#%{_includedir}/%{name}/
 %{_includedir}/gvfs-client
-#%{_libdir}/pkgconfig/%{name}*.pc
-#%doc %{_datadir}/gtk-doc/html/%{name}
 
 %files fuse
 %{_libexecdir}/gvfs-fuse-daemon
@@ -241,7 +228,6 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/bash_completion.d/%{name}
 %{_datadir}/gvfs/mounts/smb.mount
 
 %files archive
-#%dir %{_datadir}/applications/mount-archive.desktop
 %{_libexecdir}/gvfsd-archive
 %{_datadir}/gvfs/mounts/archive.mount
 
