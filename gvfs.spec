@@ -6,9 +6,11 @@
 %define enable_gphoto2 1
 %define enable_iphone 1
 
+%define Werror_cflags %nil
+
 Summary: Glib VFS library
 Name: gvfs
-Version: 1.10.1
+Version: 1.12.1
 Release: 1
 License: LGPLv2+
 Group: System/Libraries
@@ -23,6 +25,7 @@ Patch1: gvfs-1.6.7_glibh.patch
 BuildRequires:	glib2.0-common
 BuildRequires:	intltool
 BuildRequires:	cdda-devel
+BuildRequires:	pkgconfig(udisks2)
 BuildRequires:	expat-devel
 BuildRequires:	pkgconfig(glib-2.0) >= 2.31.0
 BuildRequires:	pkgconfig(gobject-2.0)
@@ -139,11 +142,12 @@ the iPhone and the iPod TouchP to applications using gvfs.
 
 %prep
 %setup -q
-%apply_patches
+%patch0 -p1
 
 %build
 %configure2_5x \
 	--with-dbus-service-dir=%{_datadir}/dbus-1/services \
+	--disable-hal \
 %if %{enable_gphoto2}
 	--enable-gphoto2
 %else
@@ -185,6 +189,7 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/bash_completion.d/%{name}
 %{_libexecdir}/gvfsd-network
 %{_libexecdir}/gvfsd-sftp
 %{_libexecdir}/gvfsd-trash
+%{_libdir}/gvfs-udisks2-volume-monitor
 %{_datadir}/dbus-1/services/gvfs-daemon.service
 %{_datadir}/dbus-1/services/gvfs-metadata.service
 %{_datadir}/dbus-1/services/org.gtk.Private.GduVolumeMonitor.service
@@ -209,6 +214,8 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/bash_completion.d/%{name}
 %{_datadir}/GConf/gsettings/gvfs-dns-sd.convert
 %{_datadir}/glib-2.0/schemas/org.gnome.system.dns_sd.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.system.gvfs.enums.xml
+%{_datadir}/gvfs/remote-volume-monitors/udisks2.monitor
+
 
 %files -n %{libname}
 %{_libdir}/libgvfscommon.so.%{major}*
@@ -244,6 +251,8 @@ install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/bash_completion.d/%{name}
 %{_datadir}/gvfs/mounts/gphoto2.mount
 %{_libexecdir}/gvfs-gphoto2-volume-monitor
 %{_datadir}/dbus-1/services/org.gtk.Private.GPhoto2VolumeMonitor.service
+%{_datadir}/dbus-1/services/org.gtk.Private.UDisks2VolumeMonitor.service
+
 %{_datadir}/gvfs/remote-volume-monitors/gphoto2.monitor
 %endif
 
