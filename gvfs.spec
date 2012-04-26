@@ -25,26 +25,22 @@ Patch1: gvfs-1.6.7_glibh.patch
 BuildRequires:	glib2.0-common
 BuildRequires:	intltool
 BuildRequires:	cdda-devel
-BuildRequires:	pkgconfig(udisks2)
 BuildRequires:	expat-devel
-BuildRequires:	pkgconfig(glib-2.0) >= 2.31.0
-BuildRequires:	pkgconfig(gobject-2.0)
-BuildRequires:	pkgconfig(gmodule-no-export-2.0)
-BuildRequires:	pkgconfig(gio-unix-2.0)
-BuildRequires:	pkgconfig(gio-2.0)
-BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(avahi-glib)
 BuildRequires:	pkgconfig(avahi-client)
-BuildRequires:	pkgconfig(smbclient)
-BuildRequires:	pkgconfig(libarchive)
+BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(fuse)
-BuildRequires:	pkgconfig(openobex)
-BuildRequires:	pkgconfig(gnome-keyring-1)
 BuildRequires:	pkgconfig(gdu)
+BuildRequires:	pkgconfig(glib-2.0) >= 2.31.0
+BuildRequires:	pkgconfig(gnome-keyring-1)
+BuildRequires:	pkgconfig(gudev-1.0)
+BuildRequires:	pkgconfig(libarchive)
 BuildRequires:	pkgconfig(libbluray)
 BuildRequires:	pkgconfig(libsoup-gnome-2.4) >= 2.26.0
 BuildRequires:	pkgconfig(libcdio_paranoia)
-BuildRequires:	pkgconfig(gudev-1.0)
+BuildRequires:	pkgconfig(openobex)
+BuildRequires:	pkgconfig(smbclient)
+BuildRequires:	pkgconfig(udisks2)
 %if %{enable_gphoto2}
 BuildRequires:	pkgconfig(libgphoto2)
 %endif
@@ -53,8 +49,7 @@ BuildRequires:	pkgconfig(libimobiledevice-1.0) >= 1.1.0
 BuildRequires:	pkgconfig(libplist) >= 0.15
 %endif
 
-Requires(post): %{gioname} >= 2.23.4-2
-Requires(postun): %{gioname} >= 2.23.4-2
+Requires(post,postun): %{gioname} >= 2.23.4-2
 Suggests: %{name}-fuse
 Suggests: %{name}-smb
 Suggests: %{name}-archive
@@ -142,7 +137,7 @@ the iPhone and the iPod TouchP to applications using gvfs.
 
 %prep
 %setup -q
-%patch0 -p1
+%apply_patches
 
 %build
 %configure2_5x \
@@ -157,7 +152,6 @@ the iPhone and the iPod TouchP to applications using gvfs.
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 find %{buildroot}%{_libdir} -name '*.la' -type f -delete -print
 %find_lang gvfs
