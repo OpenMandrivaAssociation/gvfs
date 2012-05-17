@@ -1,5 +1,5 @@
 %define major 0
-%define libname %mklibname %{name} %major
+%define libname %mklibname %{name} %{major}
 %define develname %mklibname -d %{name}
 %define gioname gio2.0
 
@@ -73,7 +73,7 @@ This is a Virtual File System library based on gio and Glib.
 Group: Development/C
 Summary: Glib VFS Library - development files
 Requires: %{libname} = %{version}-%{release}
-Provides: libgvfs-devel = %{version}-%{release}
+Provides: %{name}-devel = %{version}-%{release}
 
 %description -n %{develname}
 This is a Virtual File System library based on gio and Glib.
