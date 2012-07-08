@@ -156,7 +156,7 @@ the iPhone and the iPod TouchP to applications using gvfs.
 %install
 %makeinstall_std
 find %{buildroot}%{_libdir} -name '*.la' -type f -delete -print
-%find_lang gvfs %{gvfs}.lang
+%find_lang gvfs
 
 # upstream bash completion is installed in the wrong place, with the wrong perms
 # and redefine system variables without notice
