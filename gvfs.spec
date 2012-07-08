@@ -10,7 +10,7 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.12.3
+Version:	1.13.2
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
@@ -33,7 +33,7 @@ BuildRequires:	pkgconfig(fuse)
 BuildRequires:	pkgconfig(gdu)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.31.0
 BuildRequires:	pkgconfig(gnome-keyring-1)
-BuildRequires:	pkgconfig(gudev-1.0)
+BuildRequires:	pkgconfig(gudev-1.0) >= 186
 BuildRequires:	pkgconfig(libarchive)
 BuildRequires:	pkgconfig(libbluray)
 BuildRequires:	pkgconfig(libsoup-gnome-2.4) >= 2.26.0
@@ -51,6 +51,7 @@ BuildRequires:	pkgconfig(libplist) >= 0.15
 %endif
 
 Requires(post,postun):	%{gioname} >= 2.23.4-2
+Requires:	udisks2
 Suggests:	%{name}-fuse
 Suggests:	%{name}-smb
 Suggests:	%{name}-archive
