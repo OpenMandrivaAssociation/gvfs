@@ -16,7 +16,6 @@ License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
 Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
-Source1:	bash-completion
 #gw from Ubuntu, fix music player detection
 # https://bugs.freedesktop.org/show_bug.cgi?id=24500
 Patch0:		gvfs-music-player-mimetype.patch
@@ -161,11 +160,9 @@ find %{buildroot}%{_libdir} -name '*.la' -type f -delete -print
 # upstream bash completion is installed in the wrong place, with the wrong perms
 # and redefine system variables without notice
 rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
-install -d -m 755 %{buildroot}%{_sysconfdir}/bash_completion.d
-install -m 644 %{SOURCE1} %{buildroot}%{_sysconfdir}/bash_completion.d/%{name}
 
 %files -f gvfs.lang
-%{_sysconfdir}/bash_completion.d/gvfs
+%{_datadir}/bash-completion/completions/gvfs
 %{_bindir}/gvfs-*
 %{_libdir}/gio/modules/libgioremote-volume-monitor.so
 %{_libdir}/gio/modules/libgvfsdbus.so
