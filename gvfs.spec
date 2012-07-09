@@ -29,7 +29,6 @@ BuildRequires:	pkgconfig(avahi-glib)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(fuse)
-BuildRequires:	pkgconfig(gdu)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.31.0
 BuildRequires:	pkgconfig(gnome-keyring-1)
 BuildRequires:	pkgconfig(gudev-1.0) >= 186
@@ -144,6 +143,8 @@ the iPhone and the iPod TouchP to applications using gvfs.
 %configure2_5x \
 	--with-dbus-service-dir=%{_datadir}/dbus-1/services \
 	--disable-hal \
+	--disable-gdu \
+	--enable-udisks2 \
 %if %{enable_gphoto2}
 	--enable-gphoto2
 %else
