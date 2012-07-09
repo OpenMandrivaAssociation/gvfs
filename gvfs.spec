@@ -167,7 +167,6 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_bindir}/gvfs-*
 %{_libdir}/gio/modules/libgioremote-volume-monitor.so
 %{_libdir}/gio/modules/libgvfsdbus.so
-%{_libexecdir}/gvfs-gdu-volume-monitor
 %{_libexecdir}/gvfsd
 %{_libexecdir}/gvfsd-afp
 %{_libexecdir}/gvfsd-afp-browse
@@ -186,11 +185,9 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_libdir}/gvfs-udisks2-volume-monitor
 %{_datadir}/dbus-1/services/gvfs-daemon.service
 %{_datadir}/dbus-1/services/gvfs-metadata.service
-%{_datadir}/dbus-1/services/org.gtk.Private.GduVolumeMonitor.service
 %dir %{_datadir}/gvfs
 %dir %{_datadir}/gvfs/mounts
 %dir %{_datadir}/gvfs/remote-volume-monitors
-%{_datadir}/gvfs/remote-volume-monitors/gdu.monitor
 %{_datadir}/gvfs/mounts/afp-browse.mount
 %{_datadir}/gvfs/mounts/afp.mount
 %{_datadir}/gvfs/mounts/burn.mount
