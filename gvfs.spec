@@ -11,7 +11,7 @@
 Summary:	Glib VFS library
 Name:		gvfs
 Version:	1.13.2
-Release:	2
+Release:	3
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
@@ -63,6 +63,7 @@ Suggests:	%{name}-archive
 Suggests:	%{name}-gphoto2
 %endif
 Conflicts:	%{libname} < 1.6.7-4
+Conflicts:	%{name}-gphoto2 <= 1.13.2-2
 
 %description
 This is a Virtual File System library based on gio and Glib.
@@ -190,6 +191,7 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_libdir}/gvfs-udisks2-volume-monitor
 %{_datadir}/dbus-1/services/gvfs-daemon.service
 %{_datadir}/dbus-1/services/gvfs-metadata.service
+%{_datadir}/dbus-1/services/org.gtk.Private.UDisks2VolumeMonitor.service
 %dir %{_datadir}/gvfs
 %dir %{_datadir}/gvfs/mounts
 %dir %{_datadir}/gvfs/remote-volume-monitors
@@ -247,8 +249,6 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_datadir}/gvfs/mounts/gphoto2.mount
 %{_libexecdir}/gvfs-gphoto2-volume-monitor
 %{_datadir}/dbus-1/services/org.gtk.Private.GPhoto2VolumeMonitor.service
-%{_datadir}/dbus-1/services/org.gtk.Private.UDisks2VolumeMonitor.service
-
 %{_datadir}/gvfs/remote-volume-monitors/gphoto2.monitor
 %endif
 
