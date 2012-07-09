@@ -21,15 +21,19 @@ Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 Patch0:		gvfs-music-player-mimetype.patch
 Patch1:		gvfs-1.12.2-glibh.patch
 
-BuildRequires:	glib2.0-common
 BuildRequires:	intltool
 BuildRequires:	cdda-devel
 BuildRequires:	expat-devel
 BuildRequires:	pkgconfig(avahi-glib)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(dbus-1)
+BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(fuse)
 BuildRequires:	pkgconfig(glib-2.0) >= 2.31.0
+BuildRequires:	pkgconfig(gobject-2.0)
+BuildRequires:	pkgconfig(gmodule-no-export-2.0)
+BuildRequires:	pkgconfig(gio-unix-2.0)
+BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(gnome-keyring-1)
 BuildRequires:	pkgconfig(gudev-1.0) >= 186
 BuildRequires:	pkgconfig(libarchive)
@@ -40,6 +44,7 @@ BuildRequires:	pkgconfig(openobex)
 BuildRequires:	pkgconfig(smbclient)
 BuildRequires:	pkgconfig(udisks2)
 BuildRequires:	pkgconfig(libsystemd-login)
+BuildRequires:	pkgconfig(bluez) >= 4.0
 %if %{enable_gphoto2}
 BuildRequires:	pkgconfig(libgphoto2)
 %endif
