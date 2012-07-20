@@ -20,7 +20,7 @@ Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 # https://bugs.freedesktop.org/show_bug.cgi?id=24500
 Patch0:		gvfs-music-player-mimetype.patch
 Patch1:		gvfs-1.12.2-glibh.patch
-
+Buildrequires:	xsltproc
 BuildRequires:	intltool
 BuildRequires:	cdda-devel
 BuildRequires:	expat-devel
