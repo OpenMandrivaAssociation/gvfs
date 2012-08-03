@@ -1,12 +1,12 @@
-%define major 0
+%define major	0
 %define libname %mklibname %{name} %{major}
-%define develname %mklibname -d %{name}
-%define gioname gio2.0
+%define devname %mklibname -d %{name}
+%define gioname	gio2.0
 
-%define enable_gphoto2 1
-%define enable_iphone 1
+%define enable_gphoto2	1
+%define enable_iphone	1
 
-%define Werror_cflags %nil
+%define Werror_cflags	%nil
 
 Summary:	Glib VFS library
 Name:		gvfs
@@ -19,17 +19,19 @@ Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 #gw from Ubuntu, fix music player detection
 # https://bugs.freedesktop.org/show_bug.cgi?id=24500
 Patch0:		gvfs-music-player-mimetype.patch
-Patch1:		gvfs-1.12.2-glibh.patch
-Buildrequires:	xsltproc
+Patch1:		gvfs-1.13.4-glibh.patch
+
 BuildRequires:	intltool
+Buildrequires:	xsltproc
 BuildRequires:	cdda-devel
 BuildRequires:	expat-devel
 BuildRequires:	pkgconfig(avahi-glib)
 BuildRequires:	pkgconfig(avahi-client)
+BuildRequires:	pkgconfig(bluez)
 BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(fuse)
-BuildRequires:	pkgconfig(glib-2.0) >= 2.31.0
+BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-2.0)
 BuildRequires:	pkgconfig(gmodule-no-export-2.0)
 BuildRequires:	pkgconfig(gio-unix-2.0)
@@ -38,13 +40,12 @@ BuildRequires:	pkgconfig(gnome-keyring-1)
 BuildRequires:	pkgconfig(gudev-1.0) >= 186
 BuildRequires:	pkgconfig(libarchive)
 BuildRequires:	pkgconfig(libbluray)
-BuildRequires:	pkgconfig(libsoup-gnome-2.4) >= 2.26.0
 BuildRequires:	pkgconfig(libcdio_paranoia)
+BuildRequires:	pkgconfig(libsoup-gnome-2.4)
+BuildRequires:	pkgconfig(libsystemd-login)
 BuildRequires:	pkgconfig(openobex)
 BuildRequires:	pkgconfig(smbclient)
 BuildRequires:	pkgconfig(udisks2)
-BuildRequires:	pkgconfig(libsystemd-login)
-BuildRequires:	pkgconfig(bluez) >= 4.0
 %if %{enable_gphoto2}
 BuildRequires:	pkgconfig(libgphoto2)
 %endif
@@ -75,13 +76,13 @@ Summary:	Glib VFS library
 %description -n %{libname}
 This is a Virtual File System library based on gio and Glib.
 
-%package -n %{develname}
+%package -n %{devname}
 Group:		Development/C
 Summary:	Glib VFS Library - development files
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 
-%description -n %{develname}
+%description -n %{devname}
 This is a Virtual File System library based on gio and Glib.
 
 %package fuse
@@ -219,7 +220,7 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_libdir}/libgvfscommon.so.%{major}*
 %{_libdir}/libgvfscommon-dnssd.so.%{major}*
 
-%files -n %{develname}
+%files -n %{devname}
 %doc NEWS ChangeLog AUTHORS TODO
 %{_libdir}/lib*.so
 %{_includedir}/gvfs-client
