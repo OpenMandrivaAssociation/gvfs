@@ -218,6 +218,7 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_datadir}/glib-2.0/schemas/org.gnome.system.gvfs.enums.xml
 %{_datadir}/gvfs/remote-volume-monitors/udisks2.monitor
 %{_mandir}/man1/gvfs*.1.*
+%{_mandir}/man7/gvfs*.7.*
 
 %files -n %{libname}
 %{_libdir}/libgvfscommon.so.%{major}*
