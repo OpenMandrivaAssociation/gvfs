@@ -21,6 +21,8 @@ Source0:	ftp://ftp.gnome.org/pub/GNOME/sources/%{name}/%{name}-%{version}.tar.xz
 Patch0:		gvfs-music-player-mimetype.patch
 Patch1:		gvfs-1.13.4-glibh.patch
 
+BuildRequires:	gtk-doc
+BuildRequires:	gettext-devel
 BuildRequires:	intltool
 Buildrequires:	xsltproc
 BuildRequires:	cdda-devel
@@ -163,6 +165,7 @@ the iPhone and the iPod TouchP to applications using gvfs.
 %install
 %makeinstall_std
 find %{buildroot}%{_libdir} -name '*.la' -type f -delete -print
+
 %find_lang gvfs
 
 # upstream bash completion is installed in the wrong place, with the wrong perms
@@ -214,7 +217,7 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_datadir}/glib-2.0/schemas/org.gnome.system.dns_sd.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.system.gvfs.enums.xml
 %{_datadir}/gvfs/remote-volume-monitors/udisks2.monitor
-
+%{_mandir}/man1/gvfs*.1.*
 
 %files -n %{libname}
 %{_libdir}/libgvfscommon.so.%{major}*
@@ -226,7 +229,7 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_includedir}/gvfs-client
 
 %files fuse
-%{_libexecdir}/gvfs-fuse-daemon
+%{_libdir}/gvfsd-fuse
 
 %files smb
 %{_libexecdir}/gvfsd-smb
