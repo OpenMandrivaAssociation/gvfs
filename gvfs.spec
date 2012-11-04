@@ -222,7 +222,6 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 
 %files -n %{libname}
 %{_libdir}/libgvfscommon.so.%{major}*
-%{_libdir}/libgvfscommon-dnssd.so.%{major}*
 
 %files -n %{devname}
 %doc NEWS ChangeLog AUTHORS TODO
