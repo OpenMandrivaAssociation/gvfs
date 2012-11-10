@@ -1,0 +1,24 @@
+# Description: Add media player content type if we have a multimedia-player icon. This is a kludge until https://bugs.freedesktop.org/show_bug.cgi?id=24500 gets discussed/solved properly.
+# Ubuntu: https://launchpad.net/bugs/440290
+
+Index: gvfs-1.10.0/monitor/gdu/ggdumount.c
+===================================================================
+--- gvfs-1.10.0.orig/monitor/gdu/ggdumount.c	2009-11-18 13:14:51.000000000 +0100
++++ gvfs-1.10.0/monitor/gdu/ggdumount.c	2009-12-05 14:51:53.000000000 +0100
+@@ -1395,6 +1395,16 @@
+     }
+ #endif
+ 
++  /* also add media player if we have the multimedia-player icon (or a variant
++   * like multimedia-player-ipod-white); basing this on the icon is a kludge,
++   * better solution is being discussed in FD#24500 */
++  if (device != NULL)
++  {
++	  const char* icon = gdu_device_get_presentation_icon_name (device);
++	  if (icon != NULL && g_str_has_prefix (icon, "multimedia-player"))
++		  g_ptr_array_add (p, g_strdup ("x-content/audio-player"));
++  }
++
+   if (p->len == 0)
+     {
+       result = NULL;

@@ -1,0 +1,12 @@
+--- gvfs-1.13.4/client/gvfsfusedaemon.c.orig	2012-07-31 17:12:28.000000000 +0200
++++ gvfs-1.13.4/client/gvfsfusedaemon.c	2012-08-03 17:20:57.235883956 +0200
+@@ -34,9 +34,6 @@
+ #include <signal.h>
+ 
+ #include <glib.h>
+-#include <glib/gi18n.h>
+-#include <glib/gprintf.h>
+-#include <gio/gio.h>
+ 
+ /* stuff from common/ */
+ #include <gvfsdaemonprotocol.h>
