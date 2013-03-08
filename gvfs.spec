@@ -48,6 +48,8 @@ BuildRequires:	pkgconfig(libsystemd-login)
 BuildRequires:	pkgconfig(openobex)
 BuildRequires:	pkgconfig(smbclient)
 BuildRequires:	pkgconfig(udisks2)
+BuildRequires:	pkgconfig(libmtp)
+BuildRequires:	pkgconfig(gnome-keyring-1)
 %if %{enable_gphoto2}
 BuildRequires:	pkgconfig(libgphoto2)
 %endif
@@ -67,6 +69,7 @@ Suggests:	%{name}-gphoto2
 %endif
 Conflicts:	%{libname} < 1.6.7-4
 Conflicts:	%{name}-gphoto2 <= 1.13.2-2
+Requires(post):	rpm-helper
 
 %description
 This is a Virtual File System library based on gio and Glib.
@@ -155,10 +158,11 @@ the iPhone and the iPod TouchP to applications using gvfs.
 	--disable-gdu \
 	--enable-udisks2 \
 %if %{enable_gphoto2}
-	--enable-gphoto2
+	--enable-gphoto2 \
 %else
-	--disable-gphoto2
+	--disable-gphoto2 \
 %endif
+	--enable-keyring
 
 %make
 
@@ -172,7 +176,11 @@ find %{buildroot}%{_libdir} -name '*.la' -type f -delete -print
 # and redefine system variables without notice
 rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 
+%post
+systemd-tmpfiles --create gvfsd-fuse-tmpfiles.conf
+
 %files -f gvfs.lang
+%{_prefix}/lib/tmpfiles.d/gvfsd-fuse-tmpfiles.conf
 %{_datadir}/bash-completion/completions/gvfs
 %{_bindir}/gvfs-*
 %{_libdir}/gio/modules/libgioremote-volume-monitor.so
