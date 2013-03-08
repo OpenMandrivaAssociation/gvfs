@@ -147,6 +147,15 @@ Requires:	%{name} = %{version}-%{release}
 This package provides support for reading and writing files on
 the iPhone and the iPod TouchP to applications using gvfs.
 
+%package mtp
+Summary:	MTP support for gvfs
+Group:		System/Libraries
+Requires:	%{name} = %{version}-%{release}
+
+%description mtp
+This package provides support for reading and writing files on
+MTP based devices (Media Transfer Protocol) to applications using gvfs.
+
 %prep
 %setup -q
 %apply_patches
@@ -272,3 +281,10 @@ systemd-tmpfiles --create gvfsd-fuse-tmpfiles.conf
 %{_datadir}/gvfs/mounts/afc.mount
 %{_datadir}/gvfs/remote-volume-monitors/afc.monitor
 %endif
+
+%files mtp
+%{_libexecdir}/gvfs-mtp-volume-monitor
+%{_libexecdir}/gvfsd-mtp
+%{_datadir}/dbus-1/services/org.gtk.Private.MTPVolumeMonitor.service
+%{_datadir}/gvfs/mounts/mtp.mount
+%{_datadir}/gvfs/remote-volume-monitors/mtp.monitor
