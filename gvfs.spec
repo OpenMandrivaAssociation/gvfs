@@ -1,16 +1,16 @@
-%define major	0
+%define major 0
 %define libname %mklibname %{name} %{major}
 %define devname %mklibname -d %{name}
-%define gioname	gio2.0
+%define gioname gio2.0
 
-%define enable_gphoto2	1
-%define enable_iphone	1
+%define enable_gphoto2 1
+%define enable_iphone 1
 
-%define Werror_cflags	%nil
+%define Werror_cflags %nil
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.15.0
+Version:	1.15.4
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
@@ -24,7 +24,7 @@ Patch1:		gvfs-1.13.4-glibh.patch
 BuildRequires:	gtk-doc
 BuildRequires:	gettext-devel
 BuildRequires:	intltool
-Buildrequires:	xsltproc
+BuildRequires:	xsltproc
 BuildRequires:	cdda-devel
 BuildRequires:	expat-devel
 BuildRequires:	pkgconfig(avahi-glib)
@@ -61,7 +61,7 @@ Requires:	udisks2
 Suggests:	%{name}-fuse
 Suggests:	%{name}-smb
 Suggests:	%{name}-archive
-#Suggests: %{name}-obexftp
+#Suggests:	%{name}-obexftp
 %if %{enable_gphoto2}
 Suggests:	%{name}-gphoto2
 %endif
