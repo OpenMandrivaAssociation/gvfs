@@ -1,6 +1,6 @@
-%define major 0
-%define libname %mklibname %{name} %{major}
-%define devname %mklibname -d %{name}
+%define major	0
+%define libname %mklibname %{name}common %{major}
+%define devname %mklibname -d %{name}common
 %define gioname gio2.0
 
 %define enable_gphoto2 1
@@ -11,7 +11,7 @@
 Summary:	Glib VFS library
 Name:		gvfs
 Version:	1.15.4
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
@@ -22,16 +22,16 @@ Patch0:		gvfs-music-player-mimetype.patch
 Patch1:		gvfs-1.13.4-glibh.patch
 
 BuildRequires:	gtk-doc
-BuildRequires:	gettext-devel
 BuildRequires:	intltool
 BuildRequires:	xsltproc
 BuildRequires:	cdda-devel
-BuildRequires:	expat-devel
+BuildRequires:	gettext-devel
 BuildRequires:	pkgconfig(avahi-glib)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bluez)
 BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(dbus-glib-1)
+BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(fuse)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-2.0)
@@ -43,13 +43,12 @@ BuildRequires:	pkgconfig(gudev-1.0) >= 186
 BuildRequires:	pkgconfig(libarchive)
 BuildRequires:	pkgconfig(libbluray)
 BuildRequires:	pkgconfig(libcdio_paranoia)
+BuildRequires:	pkgconfig(libmtp)
 BuildRequires:	pkgconfig(libsoup-gnome-2.4)
 BuildRequires:	pkgconfig(libsystemd-login)
 BuildRequires:	pkgconfig(openobex)
 BuildRequires:	pkgconfig(smbclient)
 BuildRequires:	pkgconfig(udisks2)
-BuildRequires:	pkgconfig(libmtp)
-BuildRequires:	pkgconfig(gnome-keyring-1)
 %if %{enable_gphoto2}
 BuildRequires:	pkgconfig(libgphoto2)
 %endif
@@ -77,6 +76,7 @@ This is a Virtual File System library based on gio and Glib.
 %package -n %{libname}
 Group:		System/Libraries
 Summary:	Glib VFS library
+Obsoletes:	%{_lib}gvfs0 < 1.15.4-2
 
 %description -n %{libname}
 This is a Virtual File System library based on gio and Glib.
@@ -86,6 +86,7 @@ Group:		Development/C
 Summary:	Glib VFS Library - development files
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
+Obsoletes:	%{_lib}gvfs-devel < 1.15.4-2
 
 %description -n %{devname}
 This is a Virtual File System library based on gio and Glib.
@@ -177,9 +178,7 @@ MTP based devices (Media Transfer Protocol) to applications using gvfs.
 
 %install
 %makeinstall_std
-find %{buildroot}%{_libdir} -name '*.la' -type f -delete -print
-
-%find_lang gvfs
+%find_lang %{name}
 
 # upstream bash completion is installed in the wrong place, with the wrong perms
 # and redefine system variables without notice
@@ -188,7 +187,7 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %post
 systemd-tmpfiles --create gvfsd-fuse-tmpfiles.conf
 
-%files -f gvfs.lang
+%files -f %{name}.lang
 %{_prefix}/lib/tmpfiles.d/gvfsd-fuse-tmpfiles.conf
 %{_datadir}/bash-completion/completions/gvfs
 %{_bindir}/gvfs-*
