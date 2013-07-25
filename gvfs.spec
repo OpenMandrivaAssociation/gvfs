@@ -10,7 +10,7 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.16.2
+Version:	1.16.3
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
