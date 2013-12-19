@@ -10,12 +10,12 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.17.91
+Version:	1.18.3
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
-Source0:	ftp://ftp.gnome.org:21/pub/GNOME/sources/gvfs/1.17/%{name}-%{version}.tar.xz
+Source0:	https://download.gnome.org/sources/gvfs/1.18/%{name}-%{version}.tar.xz
 #gw from Ubuntu, fix music player detection
 # https://bugs.freedesktop.org/show_bug.cgi?id=24500
 Patch0:		gvfs-music-player-mimetype.patch
@@ -287,4 +287,5 @@ systemd-tmpfiles --create gvfsd-fuse-tmpfiles.conf
 %{_datadir}/dbus-1/services/org.gtk.Private.MTPVolumeMonitor.service
 %{_datadir}/gvfs/mounts/mtp.mount
 %{_datadir}/gvfs/remote-volume-monitors/mtp.monitor
+
 
