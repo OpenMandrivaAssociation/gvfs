@@ -208,7 +208,7 @@ systemd-tmpfiles --create gvfsd-fuse-tmpfiles.conf
 %{_libexecdir}/gvfsd-network
 %{_libexecdir}/gvfsd-sftp
 %{_libexecdir}/gvfsd-trash
-%{_libdir}/gvfs-udisks2-volume-monitor
+%{_libexecdir}/gvfs-udisks2-volume-monitor
 %{_datadir}/dbus-1/services/gvfs-daemon.service
 %{_datadir}/dbus-1/services/gvfs-metadata.service
 %{_datadir}/dbus-1/services/org.gtk.Private.UDisks2VolumeMonitor.service
@@ -245,7 +245,7 @@ systemd-tmpfiles --create gvfsd-fuse-tmpfiles.conf
 %{_includedir}/gvfs-client
 
 %files fuse
-%{_libdir}/gvfsd-fuse
+%{_libexecdir}/gvfsd-fuse
 
 %files smb
 %{_libexecdir}/gvfsd-smb
