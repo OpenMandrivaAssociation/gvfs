@@ -1,5 +1,4 @@
 %define major	0
-%define libname %mklibname %{name}common %{major}
 %define devname %mklibname -d %{name}common
 %define gioname gio2.0
 
@@ -10,12 +9,12 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.18.3
-Release:	4
+Version:	1.22.0
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
-Source0:	https://download.gnome.org/sources/gvfs/1.18/%{name}-%{version}.tar.xz
+Source0:	https://download.gnome.org/sources/gvfs/1.22/%{name}-%{version}.tar.xz
 #gw from Ubuntu, fix music player detection
 # https://bugs.freedesktop.org/show_bug.cgi?id=24500
 Patch0:		gvfs-music-player-mimetype.patch
@@ -66,25 +65,15 @@ Suggests:	%{name}-archive
 %if %{enable_gphoto2}
 Suggests:	%{name}-gphoto2
 %endif
-Conflicts:	%{libname} < 1.6.7-4
 Conflicts:	%{name}-gphoto2 <= 1.13.2-2
 Requires(post):	rpm-helper
 
 %description
 This is a Virtual File System library based on gio and Glib.
 
-%package -n %{libname}
-Group:		System/Libraries
-Summary:	Glib VFS library
-Obsoletes:	%{_lib}gvfs0 < 1.15.4-2
-
-%description -n %{libname}
-This is a Virtual File System library based on gio and Glib.
-
 %package -n %{devname}
 Group:		Development/C
 Summary:	Glib VFS Library - development files
-Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
 Obsoletes:	%{_lib}gvfs-devel < 1.15.4-2
 
@@ -206,9 +195,12 @@ systemd-tmpfiles --create gvfsd-fuse-tmpfiles.conf
 %{_libexecdir}/gvfsd-localtest
 %{_libexecdir}/gvfsd-metadata
 %{_libexecdir}/gvfsd-network
+%{_libexecdir}/gvfsd-recent
 %{_libexecdir}/gvfsd-sftp
 %{_libexecdir}/gvfsd-trash
 %{_libexecdir}/gvfs-udisks2-volume-monitor
+%{_libdir}/gvfs/libgvfscommon.so
+%{_libdir}/gvfs/libgvfsdaemon.so
 %{_datadir}/dbus-1/services/gvfs-daemon.service
 %{_datadir}/dbus-1/services/gvfs-metadata.service
 %{_datadir}/dbus-1/services/org.gtk.Private.UDisks2VolumeMonitor.service
@@ -227,6 +219,7 @@ systemd-tmpfiles --create gvfsd-fuse-tmpfiles.conf
 %{_datadir}/gvfs/mounts/http.mount
 %{_datadir}/gvfs/mounts/localtest.mount
 %{_datadir}/gvfs/mounts/network.mount
+%{_datadir}/gvfs/mounts/recent.mount
 %{_datadir}/gvfs/mounts/sftp.mount
 %{_datadir}/gvfs/mounts/trash.mount
 %{_datadir}/GConf/gsettings/gvfs-dns-sd.convert
@@ -236,12 +229,8 @@ systemd-tmpfiles --create gvfsd-fuse-tmpfiles.conf
 %{_mandir}/man1/gvfs*.1.*
 %{_mandir}/man7/gvfs*.7.*
 
-%files -n %{libname}
-%{_libdir}/libgvfscommon.so.%{major}*
-
 %files -n %{devname}
 %doc NEWS ChangeLog AUTHORS TODO
-%{_libdir}/lib*.so
 %{_includedir}/gvfs-client
 
 %files fuse
