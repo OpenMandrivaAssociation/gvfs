@@ -38,6 +38,7 @@ BuildRequires:	pkgconfig(gmodule-no-export-2.0)
 BuildRequires:	pkgconfig(gio-unix-2.0)
 BuildRequires:	pkgconfig(gio-2.0)
 BuildRequires:	pkgconfig(gnome-keyring-1)
+BuildRequires:	pkgconfig(gtk+-3.0) >= 3.0
 BuildRequires:	pkgconfig(gudev-1.0) >= 186
 BuildRequires:	pkgconfig(libarchive)
 BuildRequires:	pkgconfig(libbluray)
