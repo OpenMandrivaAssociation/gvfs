@@ -9,12 +9,12 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.22.0
+Version:	1.22.1
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
-Source0:	https://download.gnome.org/sources/gvfs/1.22/%{name}-%{version}.tar.xz
+Source0:	ftp://ftp.gnome.org:21/pub/GNOME/sources/gvfs/1.22/%{name}-%{version}.tar.xz
 #gw from Ubuntu, fix music player detection
 # https://bugs.freedesktop.org/show_bug.cgi?id=24500
 Patch0:		gvfs-music-player-mimetype.patch
@@ -121,7 +121,7 @@ This package provides support for reading files on Bluetooth mobile phones
 and devices through ObexFTP to applications using gvfs.
 
 %package gphoto2
-Summary:	gphoto2 support for gvfs
+Summary:	Gphoto2 support for gvfs
 Group:		System/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -131,7 +131,7 @@ PTP based cameras (Picture Transfer Protocol) and MTP based
 media players (Media Transfer Protocol) to applications using gvfs.
 
 %package iphone
-Summary:	iphone support for gvfs
+Summary:	Iphone support for gvfs
 Group:		System/Libraries
 Requires:	%{name} = %{version}-%{release}
 
@@ -278,5 +278,3 @@ systemd-tmpfiles --create gvfsd-fuse-tmpfiles.conf
 %{_datadir}/dbus-1/services/org.gtk.Private.MTPVolumeMonitor.service
 %{_datadir}/gvfs/mounts/mtp.mount
 %{_datadir}/gvfs/remote-volume-monitors/mtp.monitor
-
-

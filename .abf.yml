@@ -2,5 +2,6 @@ removed_sources:
   gvfs-1.16.3.tar.xz: e1a6150888bc9438f5423a8005813f07e64818d8
   gvfs-1.17.91.tar.xz: 16607b8049e31f05e1fb20f41fb988daf5a99969
   gvfs-1.18.3.tar.xz: d6e899c6915816589e834a455e0ae11570c1097b
-sources:
   gvfs-1.22.0.tar.xz: b0228e0a9b1e5731130fa936b506790cb8c84f26
+sources:
+  gvfs-1.22.1.tar.xz: 390234f24810334ac21d5fe4b72d58ceaca4a5c3
