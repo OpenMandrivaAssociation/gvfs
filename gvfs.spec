@@ -9,12 +9,12 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.22.1
+Version:	1.23.1
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
-Source0:	ftp://ftp.gnome.org:21/pub/GNOME/sources/gvfs/1.22/%{name}-%{version}.tar.xz
+Source0:	ftp://ftp.gnome.org:21/pub/GNOME/sources/gvfs/1.23/%{name}-%{version}.tar.xz
 #gw from Ubuntu, fix music player detection
 # https://bugs.freedesktop.org/show_bug.cgi?id=24500
 Patch0:		gvfs-music-player-mimetype.patch
