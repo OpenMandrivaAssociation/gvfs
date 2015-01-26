@@ -9,8 +9,8 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.23.2
-Release:	4
+Version:	1.23.4
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
@@ -153,7 +153,7 @@ MTP based devices (Media Transfer Protocol) to applications using gvfs.
 %apply_patches
 
 %build
-%configure2_5x \
+%configure \
 	--with-dbus-service-dir=%{_datadir}/dbus-1/services \
 	--disable-hal \
 	--disable-gdu \
@@ -176,7 +176,7 @@ MTP based devices (Media Transfer Protocol) to applications using gvfs.
 rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 
 %post
-systemd-tmpfiles --create gvfsd-fuse-tmpfiles.conf
+%tmpfiles_create gvfsd-fuse-tmpfiles.conf
 
 %files -f %{name}.lang
 %{_prefix}/lib/tmpfiles.d/gvfsd-fuse-tmpfiles.conf
