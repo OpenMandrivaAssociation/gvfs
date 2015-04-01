@@ -69,6 +69,7 @@ Suggests:	%{name}-gphoto2
 %endif
 Conflicts:	%{name}-gphoto2 <= 1.13.2-2
 Requires(post):	rpm-helper
+%rename gvfs-obexftp < 1.24.0-1
 
 %description
 This is a Virtual File System library based on gio and Glib.
@@ -109,16 +110,6 @@ Requires:	%{name} = %{version}-%{release}
 %description archive
 This package provides support for accessing files inside Zip and Tar archives,
 as well as ISO images, to applications using gvfs.
-
-%package obexftp
-Summary:	ObexFTP support for gvfs
-Group:		System/Libraries
-Requires:	%{name} = %{version}-%{release}
-Requires:	obex-data-server >= 0.3.4-6
-
-%description obexftp
-This package provides support for reading files on Bluetooth mobile phones
-and devices through ObexFTP to applications using gvfs.
 
 %package gphoto2
 Summary:	Gphoto2 support for gvfs
@@ -175,12 +166,9 @@ MTP based devices (Media Transfer Protocol) to applications using gvfs.
 # and redefine system variables without notice
 rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 
-%post
-%tmpfiles_create gvfsd-fuse-tmpfiles.conf
-
 %files -f %{name}.lang
 %{_prefix}/lib/tmpfiles.d/gvfsd-fuse-tmpfiles.conf
-%{_datadir}/bash-completion/completions/gvfs
+%{_datadir}/bash-completion/completions/gvfs-*
 %{_bindir}/gvfs-*
 %{_libdir}/gio/modules/libgioremote-volume-monitor.so
 %{_libdir}/gio/modules/libgvfsdbus.so
@@ -249,10 +237,6 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %files archive
 %{_libexecdir}/gvfsd-archive
 %{_datadir}/gvfs/mounts/archive.mount
-
-%files obexftp
-%{_libexecdir}/gvfsd-obexftp
-%{_datadir}/gvfs/mounts/obexftp.mount
 
 %if %{enable_gphoto2}
 %files gphoto2
