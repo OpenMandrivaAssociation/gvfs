@@ -1,4 +1,4 @@
-%define major	0
+%define major 0
 %define devname %mklibname -d %{name}common
 %define gioname gio2.0
 
@@ -9,7 +9,7 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.23.4
+Version:	1.24.0
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
