@@ -194,9 +194,12 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_libexecdir}/gvfs-udisks2-volume-monitor
 %{_libdir}/gvfs/libgvfscommon.so
 %{_libdir}/gvfs/libgvfsdaemon.so
-%{_datadir}/dbus-1/services/gvfs-daemon.service
-%{_datadir}/dbus-1/services/gvfs-metadata.service
-%{_datadir}/dbus-1/services/org.gtk.Private.UDisks2VolumeMonitor.service
+%{_userunitdir}/gvfs-daemon.service
+%{_userunitdir}/gvfs-metadata.service
+%{_userunitdir}/gvfs-udisks2-volume-monitor.service
+%{_datadir}/dbus-1/services/org.gtk.vfs.UDisks2VolumeMonitor.service
+%{_datadir}/dbus-1/services/org.gtk.vfs.Daemon.service
+%{_datadir}/dbus-1/services/org.gtk.vfs.Metadata.service
 %dir %{_datadir}/gvfs
 %dir %{_datadir}/gvfs/mounts
 %dir %{_datadir}/gvfs/remote-volume-monitors
@@ -209,6 +212,7 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_datadir}/gvfs/mounts/dav+sd.mount
 %{_datadir}/gvfs/mounts/dns-sd.mount
 %{_datadir}/gvfs/mounts/ftp.mount
+%{_datadir}/gvfs/mounts/ftps.mount
 %{_datadir}/gvfs/mounts/http.mount
 %{_datadir}/gvfs/mounts/localtest.mount
 %{_datadir}/gvfs/mounts/network.mount
@@ -246,22 +250,25 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_libexecdir}/gvfsd-gphoto2
 %{_datadir}/gvfs/mounts/gphoto2.mount
 %{_libexecdir}/gvfs-gphoto2-volume-monitor
-%{_datadir}/dbus-1/services/org.gtk.Private.GPhoto2VolumeMonitor.service
+%{_datadir}/dbus-1/services/org.gtk.vfs.GPhoto2VolumeMonitor.service
 %{_datadir}/gvfs/remote-volume-monitors/gphoto2.monitor
+%{_userunitdir}/gvfs-gphoto2-volume-monitor.service
 %endif
 
 %if %{enable_iphone}
 %files iphone
 %{_libexecdir}/gvfs-afc-volume-monitor
 %{_libexecdir}/gvfsd-afc
-%{_datadir}/dbus-1/services/org.gtk.Private.AfcVolumeMonitor.service
+%{_datadir}/dbus-1/services/org.gtk.vfs.AfcVolumeMonitor.service
 %{_datadir}/gvfs/mounts/afc.mount
 %{_datadir}/gvfs/remote-volume-monitors/afc.monitor
+%{_userunitdir}/gvfs-afc-volume-monitor.service
 %endif
 
 %files mtp
 %{_libexecdir}/gvfs-mtp-volume-monitor
 %{_libexecdir}/gvfsd-mtp
-%{_datadir}/dbus-1/services/org.gtk.Private.MTPVolumeMonitor.service
+%{_datadir}/dbus-1/services/org.gtk.vfs.MTPVolumeMonitor.service
 %{_datadir}/gvfs/mounts/mtp.mount
 %{_datadir}/gvfs/remote-volume-monitors/mtp.monitor
+%{_userunitdir}/gvfs-mtp-volume-monitor.service
