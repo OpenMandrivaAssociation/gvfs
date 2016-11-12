@@ -11,7 +11,7 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.26.3
+Version:	1.30.2
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
@@ -45,12 +45,14 @@ BuildRequires:	pkgconfig(gtk+-3.0) >= 3.0
 BuildRequires:	pkgconfig(gudev-1.0) >= 186
 BuildRequires:	pkgconfig(libarchive)
 BuildRequires:	pkgconfig(libbluray)
+BuildRequires:	pkgconfig(libcap)
 BuildRequires:	pkgconfig(libcdio_paranoia)
 BuildRequires:	pkgconfig(libmtp)
+BuildRequires:	pkgconfig(libnfs)
 BuildRequires:	pkgconfig(libsoup-gnome-2.4)
 BuildRequires:	pkgconfig(libsystemd)
-BuildRequires:	pkgconfig(libsystemd-login)
 BuildRequires:	pkgconfig(openobex)
+BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	pkgconfig(smbclient)
 BuildRequires:	pkgconfig(udisks2)
 %if %{enable_gphoto2}
@@ -151,6 +153,7 @@ MTP based devices (Media Transfer Protocol) to applications using gvfs.
 	--with-dbus-service-dir=%{_datadir}/dbus-1/services \
 	--disable-hal \
 	--disable-gdu \
+	--disable-goa \
 	--enable-udisks2 \
 %if %{enable_gphoto2}
 	--enable-gphoto2 \
@@ -176,6 +179,7 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_libdir}/gio/modules/libgioremote-volume-monitor.so
 %{_libdir}/gio/modules/libgvfsdbus.so
 %{_libexecdir}/gvfsd
+%{_libexecdir}/gvfsd-admin
 %{_libexecdir}/gvfsd-afp
 %{_libexecdir}/gvfsd-afp-browse
 %{_libexecdir}/gvfsd-burn
@@ -188,6 +192,7 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_libexecdir}/gvfsd-localtest
 %{_libexecdir}/gvfsd-metadata
 %{_libexecdir}/gvfsd-network
+%{_libexecdir}/gvfsd-nfs
 %{_libexecdir}/gvfsd-recent
 %{_libexecdir}/gvfsd-sftp
 %{_libexecdir}/gvfsd-trash
@@ -203,6 +208,7 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %dir %{_datadir}/gvfs
 %dir %{_datadir}/gvfs/mounts
 %dir %{_datadir}/gvfs/remote-volume-monitors
+%{_datadir}/gvfs/mounts/admin.mount
 %{_datadir}/gvfs/mounts/afp-browse.mount
 %{_datadir}/gvfs/mounts/afp.mount
 %{_datadir}/gvfs/mounts/burn.mount
@@ -216,6 +222,7 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_datadir}/gvfs/mounts/http.mount
 %{_datadir}/gvfs/mounts/localtest.mount
 %{_datadir}/gvfs/mounts/network.mount
+%{_datadir}/gvfs/mounts/nfs.mount
 %{_datadir}/gvfs/mounts/recent.mount
 %{_datadir}/gvfs/mounts/sftp.mount
 %{_datadir}/gvfs/mounts/trash.mount
@@ -223,11 +230,12 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_datadir}/glib-2.0/schemas/org.gnome.system.dns_sd.gschema.xml
 %{_datadir}/glib-2.0/schemas/org.gnome.system.gvfs.enums.xml
 %{_datadir}/gvfs/remote-volume-monitors/udisks2.monitor
+%{_datadir}/polkit-1/*/org.gtk.vfs.file-operations.*
 %{_mandir}/man1/gvfs*.1.*
 %{_mandir}/man7/gvfs*.7.*
 
 %files -n %{devname}
-%doc NEWS ChangeLog AUTHORS TODO
+%doc NEWS ChangeLog AUTHORS
 %{_includedir}/gvfs-client
 
 %files fuse
