@@ -11,7 +11,7 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.30.3
+Version:	1.32.1
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
@@ -48,7 +48,7 @@ BuildRequires:	pkgconfig(libbluray)
 BuildRequires:	pkgconfig(libcap)
 BuildRequires:	pkgconfig(libcdio_paranoia)
 BuildRequires:	pkgconfig(libmtp)
-BuildRequires:	pkgconfig(libnfs)
+BuildRequires:	pkgconfig(libnfs) >= 1.9.8
 BuildRequires:	pkgconfig(libsoup-gnome-2.4)
 BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pkgconfig(openobex)
@@ -151,7 +151,6 @@ MTP based devices (Media Transfer Protocol) to applications using gvfs.
 %build
 %configure \
 	--with-dbus-service-dir=%{_datadir}/dbus-1/services \
-	--disable-hal \
 	--disable-gdu \
 	--disable-goa \
 	--enable-udisks2 \
@@ -174,7 +173,6 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 
 %files -f %{name}.lang
 %{_prefix}/lib/tmpfiles.d/gvfsd-fuse-tmpfiles.conf
-%{_datadir}/bash-completion/completions/gvfs-*
 %{_bindir}/gvfs-*
 %{_libdir}/gio/modules/libgioremote-volume-monitor.so
 %{_libdir}/gio/modules/libgvfsdbus.so
