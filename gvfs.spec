@@ -11,8 +11,8 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.34.1
-Release:	2
+Version:	1.34.2
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
@@ -59,7 +59,7 @@ BuildRequires:	pkgconfig(udisks2)
 BuildRequires:	pkgconfig(libgphoto2)
 %endif
 %if %{enable_iphone}
-BuildRequires:	pkgconfig(libimobiledevice-1.0) >= 1.1.0
+BuildRequires:	pkgconfig(libimobiledevice-1.0) >= 1.2.0
 BuildRequires:	pkgconfig(libplist) >= 0.15
 %endif
 
