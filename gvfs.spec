@@ -74,7 +74,7 @@ Suggests:	%{name}-gphoto2
 %endif
 Conflicts:	%{name}-gphoto2 <= 1.13.2-2
 Requires(post):	rpm-helper
-%rename gvfs-obexftp < 1.24.0-1
+%rename gvfs-obexftp
 
 %description
 This is a Virtual File System library based on gio and Glib.
