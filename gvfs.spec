@@ -11,15 +11,12 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.36.2
+Version:	1.38.0
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gvfs/%url_ver/%{name}-%{version}.tar.xz
-#gw from Ubuntu, fix music player detection
-# https://bugs.freedesktop.org/show_bug.cgi?id=24500
-Patch0:		gvfs-music-player-mimetype.patch
 Patch1:		gvfs-1.13.4-glibh.patch
 
 BuildRequires:	gtk-doc
@@ -55,6 +52,8 @@ BuildRequires:	pkgconfig(openobex)
 BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	pkgconfig(smbclient)
 BuildRequires:	pkgconfig(udisks2)
+BuildRequires:	pkgconfig(goa-1.0)
+BuildRequires:	pkgconfig(libgdata)
 %if %{enable_gphoto2}
 BuildRequires:	pkgconfig(libgphoto2)
 %endif
@@ -149,22 +148,11 @@ MTP based devices (Media Transfer Protocol) to applications using gvfs.
 %apply_patches
 
 %build
-%configure \
-	--with-dbus-service-dir=%{_datadir}/dbus-1/services \
-	--disable-gdu \
-	--disable-goa \
-	--enable-udisks2 \
-%if %{enable_gphoto2}
-	--enable-gphoto2 \
-%else
-	--disable-gphoto2 \
-%endif
-	--enable-keyring
-
-%make
+%meson -D systemduserunitdir=%{_userunitdir}
+%meson_build
 
 %install
-%makeinstall_std
+%meson_install
 %find_lang %{name}
 
 # upstream bash completion is installed in the wrong place, with the wrong perms
@@ -173,7 +161,6 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 
 %files -f %{name}.lang
 %{_prefix}/lib/tmpfiles.d/gvfsd-fuse-tmpfiles.conf
-%{_bindir}/gvfs-*
 %{_libdir}/gio/modules/libgioremote-volume-monitor.so
 %{_libdir}/gio/modules/libgvfsdbus.so
 %{_libexecdir}/gvfsd
@@ -194,18 +181,25 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_libexecdir}/gvfsd-recent
 %{_libexecdir}/gvfsd-sftp
 %{_libexecdir}/gvfsd-trash
+%{_libexecdir}/gvfs-goa-volume-monitor
+%{_libexecdir}/gvfsd-google
 %{_libexecdir}/gvfs-udisks2-volume-monitor
 %{_libdir}/gvfs/libgvfscommon.so
 %{_libdir}/gvfs/libgvfsdaemon.so
+%{_datadir}/gvfs/remote-volume-monitors/goa.monitor
 %{_userunitdir}/gvfs-daemon.service
 %{_userunitdir}/gvfs-metadata.service
 %{_userunitdir}/gvfs-udisks2-volume-monitor.service
+%{_userunitdir}/gvfs-goa-volume-monitor.service
 %{_datadir}/dbus-1/services/org.gtk.vfs.UDisks2VolumeMonitor.service
 %{_datadir}/dbus-1/services/org.gtk.vfs.Daemon.service
 %{_datadir}/dbus-1/services/org.gtk.vfs.Metadata.service
+%{_datadir}/dbus-1/services/org.gtk.vfs.GoaVolumeMonitor.service
 %dir %{_datadir}/gvfs
 %dir %{_datadir}/gvfs/mounts
 %dir %{_datadir}/gvfs/remote-volume-monitors
+%{_datadir}/gvfs/mounts/ftpis.mount
+%{_datadir}/gvfs/mounts/google.mount
 %{_datadir}/gvfs/mounts/admin.mount
 %{_datadir}/gvfs/mounts/afp-browse.mount
 %{_datadir}/gvfs/mounts/afp.mount
@@ -229,11 +223,9 @@ rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
 %{_datadir}/glib-2.0/schemas/org.gnome.system.gvfs.enums.xml
 %{_datadir}/gvfs/remote-volume-monitors/udisks2.monitor
 %{_datadir}/polkit-1/*/org.gtk.vfs.file-operations.*
-%{_mandir}/man1/gvfs*.1.*
-%{_mandir}/man7/gvfs*.7.*
 
 %files -n %{devname}
-%doc NEWS ChangeLog AUTHORS
+%doc NEWS
 %{_includedir}/gvfs-client
 
 %files fuse
