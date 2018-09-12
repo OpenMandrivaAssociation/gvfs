@@ -24,6 +24,7 @@ BuildRequires:	intltool
 BuildRequires:	xsltproc
 BuildRequires:	cdda-devel
 BuildRequires:	gettext-devel
+BuildRequires:	meson
 BuildRequires:	pkgconfig(avahi-glib)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bluez)
