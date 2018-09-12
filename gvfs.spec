@@ -26,6 +26,7 @@ BuildRequires:	cdda-devel
 BuildRequires:	gettext-devel
 BuildRequires:	meson
 BuildRequires:	pkgconfig(avahi-glib)
+BuildRequires:	pkgconfig(libgcrypt)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bluez)
 BuildRequires:	pkgconfig(dbus-1)
