@@ -27,6 +27,7 @@ BuildRequires:	gettext-devel
 BuildRequires:	meson
 BuildRequires:	pkgconfig(avahi-glib)
 BuildRequires:	pkgconfig(libgcrypt)
+BuildRequires:	pkgconfig(goa-1.0)
 BuildRequires:	pkgconfig(avahi-client)
 BuildRequires:	pkgconfig(bluez)
 BuildRequires:	pkgconfig(dbus-1)
