@@ -24,6 +24,7 @@ BuildRequires:	intltool
 BuildRequires:	xsltproc
 BuildRequires:	cdda-devel
 BuildRequires:	gettext-devel
+BuildRequires:  openssh-clients
 BuildRequires:	meson
 BuildRequires:	pkgconfig(avahi-glib)
 BuildRequires:	pkgconfig(libgcrypt)
