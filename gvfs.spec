@@ -152,7 +152,7 @@ MTP based devices (Media Transfer Protocol) to applications using gvfs.
 
 %prep
 %setup -q
-%apply_patches
+%autopatch -p1
 
 %build
 %meson -D systemduserunitdir=%{_userunitdir}
