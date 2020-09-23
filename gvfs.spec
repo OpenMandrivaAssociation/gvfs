@@ -66,7 +66,7 @@ BuildRequires:	pkgconfig(libgphoto2)
 %endif
 %if %{enable_iphone}
 BuildRequires:	pkgconfig(libimobiledevice-1.0) >= 1.2.0
-BuildRequires:	pkgconfig(libplist)
+BuildRequires:	pkgconfig(libplist-2.0)      
 %endif
 
 Requires(post,postun):	%{gioname} >= 2.23.4-2
