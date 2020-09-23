@@ -11,7 +11,7 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.44.1
+Version:	1.46.0
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
@@ -66,7 +66,7 @@ BuildRequires:	pkgconfig(libgphoto2)
 %endif
 %if %{enable_iphone}
 BuildRequires:	pkgconfig(libimobiledevice-1.0) >= 1.2.0
-BuildRequires:	pkgconfig(libplist) >= 0.15
+BuildRequires:	pkgconfig(libplist-2.0)      
 %endif
 
 Requires(post,postun):	%{gioname} >= 2.23.4-2
