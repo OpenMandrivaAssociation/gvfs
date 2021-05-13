@@ -12,7 +12,7 @@
 Summary:	Glib VFS library
 Name:		gvfs
 Version:	1.48.1
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
@@ -24,7 +24,7 @@ BuildRequires:	intltool
 BuildRequires:	xsltproc
 BuildRequires:	cdda-devel
 BuildRequires:	gettext-devel
-BuildRequires:  openssh-clients
+BuildRequires:	openssh-clients
 BuildRequires:	meson
 BuildRequires:	pkgconfig(avahi-glib)
 BuildRequires:	pkgconfig(libgcrypt)
@@ -35,9 +35,9 @@ BuildRequires:	pkgconfig(dbus-1)
 BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(fuse)
-BuildRequires:  pkgconfig(fuse3)
+BuildRequires:	pkgconfig(fuse3)
 BuildRequires:	pkgconfig(gcr-base-3)
-BuildRequires:  pkgconfig(gsettings-desktop-schemas)
+BuildRequires:	pkgconfig(gsettings-desktop-schemas)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-2.0)
 BuildRequires:	pkgconfig(gmodule-no-export-2.0)
@@ -52,7 +52,7 @@ BuildRequires:	pkgconfig(libcap)
 BuildRequires:	pkgconfig(libcdio_paranoia)
 BuildRequires:	pkgconfig(libmtp)
 BuildRequires:	pkgconfig(libnfs) >= 1.9.8
-BuildRequires:  pkgconfig(libsecret-unstable)
+BuildRequires:	pkgconfig(libsecret-unstable)
 BuildRequires:	pkgconfig(libsoup-gnome-2.4)
 BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pkgconfig(openobex)
@@ -68,8 +68,8 @@ BuildRequires:	pkgconfig(libgphoto2)
 BuildRequires:	pkgconfig(libimobiledevice-1.0) >= 1.2.0
 BuildRequires:	pkgconfig(libplist-2.0)      
 %endif
-
 Requires(post,postun):	%{gioname} >= 2.23.4-2
+Requires(post):	psmisc
 Requires:	udisks2
 Suggests:	%{name}-fuse
 Suggests:	%{name}-smb
@@ -79,7 +79,6 @@ Suggests:	%{name}-archive
 Suggests:	%{name}-gphoto2
 %endif
 Conflicts:	%{name}-gphoto2 <= 1.13.2-2
-Requires(post):	rpm-helper
 %rename gvfs-obexftp
 
 %description
@@ -165,6 +164,10 @@ MTP based devices (Media Transfer Protocol) to applications using gvfs.
 # upstream bash completion is installed in the wrong place, with the wrong perms
 # and redefine system variables without notice
 rm -f %{buildroot}%{_sysconfdir}/profile.d/gvfs-bash-completion.sh
+
+%post
+# Reload .mount files:
+killall -USR1 gvfsd >&/dev/null || :
 
 %files -f %{name}.lang
 %{_prefix}/lib/tmpfiles.d/gvfsd-fuse-tmpfiles.conf
