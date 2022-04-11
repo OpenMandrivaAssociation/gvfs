@@ -11,8 +11,8 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.48.1
-Release:	5
+Version:	1.50.0
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
@@ -53,7 +53,7 @@ BuildRequires:	pkgconfig(libcdio_paranoia)
 BuildRequires:	pkgconfig(libmtp)
 BuildRequires:	pkgconfig(libnfs) >= 1.9.8
 BuildRequires:	pkgconfig(libsecret-unstable)
-BuildRequires:	pkgconfig(libsoup-gnome-2.4)
+BuildRequires:	pkgconfig(libsoup-3.0)
 BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pkgconfig(openobex)
 BuildRequires:	pkgconfig(polkit-gobject-1)
