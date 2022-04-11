@@ -53,7 +53,7 @@ BuildRequires:	pkgconfig(libcdio_paranoia)
 BuildRequires:	pkgconfig(libmtp)
 BuildRequires:	pkgconfig(libnfs) >= 1.9.8
 BuildRequires:	pkgconfig(libsecret-unstable)
-BuildRequires:	pkgconfig(libsoup-gnome-2.4)
+BuildRequires:	pkgconfig(libsoup-3.0)
 BuildRequires:	pkgconfig(libsystemd)
 BuildRequires:	pkgconfig(openobex)
 BuildRequires:	pkgconfig(polkit-gobject-1)
