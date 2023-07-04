@@ -156,6 +156,8 @@ MTP based devices (Media Transfer Protocol) to applications using gvfs.
 %autopatch -p1
 
 %build
+export CC=gcc
+export CXX=g++
 %meson -D systemduserunitdir=%{_userunitdir}
 %meson_build
 
