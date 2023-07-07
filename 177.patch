@@ -1,0 +1,11 @@
+diff -uraN gvfs-1.50.5/client/gvfsfusedaemon.c omv-gvfs-1.50.5/client/gvfsfusedaemon.c
+--- gvfs-1.50.5/client/gvfsfusedaemon.c	2023-06-30 10:40:20.000000000 +0200
++++ omv-gvfs-1.50.5/client/gvfsfusedaemon.c	2023-07-07 16:44:32.835577458 +0200
+@@ -32,6 +32,7 @@
+ #include <string.h>
+ #include <errno.h>
+ #include <signal.h>
++#include <locale.h>
+ 
+ #include <glib.h>
+ #include <glib/gi18n.h>
