@@ -19,7 +19,7 @@ License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gvfs/%url_ver/%{name}-%{version}.tar.xz
-Patch1:		gvfs-1.13.4-glibh.patch
+#Patch1:		gvfs-1.13.4-glibh.patch
 Patch2:  https://gitlab.gnome.org/GNOME/gvfs/-/merge_requests/177.patch
 
 BuildRequires:	gtk-doc
