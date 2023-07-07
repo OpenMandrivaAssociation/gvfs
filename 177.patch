@@ -9,14 +9,3 @@ diff -uraN gvfs-1.50.5/client/gvfsfusedaemon.c omv-gvfs-1.50.5/client/gvfsfuseda
  
  #include <glib.h>
  #include <glib/gi18n.h>
-diff -uraN gvfs-1.50.5/meson.build omv-gvfs-1.50.5/meson.build
---- gvfs-1.50.5/meson.build	2023-06-30 10:40:20.000000000 +0200
-+++ omv-gvfs-1.50.5/meson.build	2023-07-07 16:43:40.817886696 +0200
-@@ -4,6 +4,7 @@
-   license: 'LGPL2+',
-   default_options: 'buildtype=debugoptimized',
-   meson_version: '>= 0.56.0',
-+  default_options: ['warning_level=1']
- )
- 
- gvfs_name = meson.project_name()
