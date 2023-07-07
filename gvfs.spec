@@ -20,6 +20,7 @@ Group:		System/Libraries
 Url:		http://www.gnome.org/
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gvfs/%url_ver/%{name}-%{version}.tar.xz
 Patch1:		gvfs-1.13.4-glibh.patch
+Patch2:  https://gitlab.gnome.org/GNOME/gvfs/-/merge_requests/174.patch
 
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
@@ -156,8 +157,8 @@ MTP based devices (Media Transfer Protocol) to applications using gvfs.
 %autopatch -p1
 
 %build
-export CC=gcc
-export CXX=g++
+#export CC=gcc
+#export CXX=g++
 %meson -D systemduserunitdir=%{_userunitdir}
 %meson_build
 
