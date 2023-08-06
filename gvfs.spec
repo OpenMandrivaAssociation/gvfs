@@ -13,8 +13,8 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.50.5
-Release:	2
+Version:	1.50.6
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://www.gnome.org/
