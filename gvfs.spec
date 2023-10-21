@@ -13,12 +13,12 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.52.0
+Version:	1.52.1
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
-Url:		http://www.gnome.org/
-Source0:	http://ftp.gnome.org/pub/GNOME/sources/gvfs/%url_ver/%{name}-%{version}.tar.xz
+Url:		https://www.gnome.org/
+Source0:	https://ftp.gnome.org/pub/GNOME/sources/gvfs/%url_ver/%{name}-%{version}.tar.xz
 
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
