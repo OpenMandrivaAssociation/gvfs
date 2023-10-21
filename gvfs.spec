@@ -20,6 +20,7 @@ Group:		System/Libraries
 Url:		https://www.gnome.org/
 Source0:	https://ftp.gnome.org/pub/GNOME/sources/gvfs/%url_ver/%{name}-%{version}.tar.xz
 
+BuildRequires:  gio2.0
 BuildRequires:	gtk-doc
 BuildRequires:	intltool
 BuildRequires:	xsltproc
