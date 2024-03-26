@@ -13,7 +13,7 @@
 
 Summary:	Glib VFS library
 Name:		gvfs
-Version:	1.52.2
+Version:	1.54.0
 Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
@@ -38,7 +38,7 @@ BuildRequires:	pkgconfig(dbus-glib-1)
 BuildRequires:	pkgconfig(expat)
 BuildRequires:	pkgconfig(fuse)
 BuildRequires:	pkgconfig(fuse3)
-BuildRequires:	pkgconfig(gcr-base-3)
+BuildRequires:	pkgconfig(gcr-4)
 BuildRequires:	pkgconfig(gsettings-desktop-schemas)
 BuildRequires:	pkgconfig(glib-2.0)
 BuildRequires:	pkgconfig(gobject-2.0)
