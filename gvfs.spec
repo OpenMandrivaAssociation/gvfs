@@ -200,6 +200,7 @@ killall -USR1 gvfsd >&/dev/null || :
 %{_libexecdir}/gvfs-goa-volume-monitor
 %{_libexecdir}/gvfsd-google
 %{_libexecdir}/gvfs-udisks2-volume-monitor
+%{_libexecdir}/gvfsd-wsdd
 %{_libdir}/gvfs/libgvfscommon.so
 %{_libdir}/gvfs/libgvfsdaemon.so
 %{_datadir}/gvfs/remote-volume-monitors/goa.monitor
@@ -211,6 +212,8 @@ killall -USR1 gvfsd >&/dev/null || :
 %{_datadir}/dbus-1/services/org.gtk.vfs.Daemon.service
 %{_datadir}/dbus-1/services/org.gtk.vfs.Metadata.service
 %{_datadir}/dbus-1/services/org.gtk.vfs.GoaVolumeMonitor.service
+%{_datadir}/glib-2.0/schemas/org.gnome.system.wsdd.gschema.xml
+%{_datadir}/gvfs/mounts/wsdd.mount
 %dir %{_datadir}/gvfs
 %dir %{_datadir}/gvfs/mounts
 %dir %{_datadir}/gvfs/remote-volume-monitors
