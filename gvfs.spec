@@ -158,7 +158,9 @@ MTP based devices (Media Transfer Protocol) to applications using gvfs.
 %build
 #export CC=gcc
 #export CXX=g++
-%meson -D systemduserunitdir=%{_userunitdir}
+%meson \
+        -Dsystemduserunitdir=%{_userunitdir} \
+        -Donedrive=false
 %meson_build
 
 %install
