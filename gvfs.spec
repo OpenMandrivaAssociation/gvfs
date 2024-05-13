@@ -14,7 +14,7 @@
 Summary:	Glib VFS library
 Name:		gvfs
 Version:	1.54.0
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		https://www.gnome.org/
@@ -57,6 +57,7 @@ BuildRequires:	pkgconfig(libnfs) >= 1.9.8
 BuildRequires:	pkgconfig(libsecret-unstable)
 BuildRequires:	pkgconfig(libsoup-3.0)
 BuildRequires:	pkgconfig(libsystemd)
+BuildRequires:  pkgconfig(msgraph-0.1)
 BuildRequires:	pkgconfig(openobex)
 BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	pkgconfig(smbclient)
@@ -73,6 +74,7 @@ BuildRequires:	pkgconfig(libplist-2.0)
 Requires(post,postun):	%{gioname} >= 2.23.4-2
 Requires(post):	psmisc
 Requires:	udisks2
+#FIXME# We should prob. replace suggests with recomends.
 Suggests:	%{name}-fuse
 Suggests:	%{name}-smb
 Suggests:	%{name}-archive
@@ -156,11 +158,9 @@ MTP based devices (Media Transfer Protocol) to applications using gvfs.
 %autopatch -p1
 
 %build
-#export CC=gcc
-#export CXX=g++
 %meson \
         -Dsystemduserunitdir=%{_userunitdir} \
-        -Donedrive=false
+        -Donedrive=true
 %meson_build
 
 %install
@@ -194,6 +194,7 @@ killall -USR1 gvfsd >&/dev/null || :
 %{_libexecdir}/gvfsd-metadata
 %{_libexecdir}/gvfsd-network
 %{_libexecdir}/gvfsd-nfs
+%{_libexecdir}/gvfsd-onedrive
 %{_libexecdir}/gvfsd-recent
 %{_libexecdir}/gvfsd-sftp
 %{_libexecdir}/gvfsd-trash
@@ -217,6 +218,7 @@ killall -USR1 gvfsd >&/dev/null || :
 %dir %{_datadir}/gvfs
 %dir %{_datadir}/gvfs/mounts
 %dir %{_datadir}/gvfs/remote-volume-monitors
+%{_datadir}/gvfs/mounts/onedrive.mount
 %{_datadir}/gvfs/mounts/ftpis.mount
 %{_datadir}/gvfs/mounts/google.mount
 %{_datadir}/gvfs/mounts/admin.mount
