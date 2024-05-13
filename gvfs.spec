@@ -194,6 +194,7 @@ killall -USR1 gvfsd >&/dev/null || :
 %{_libexecdir}/gvfsd-metadata
 %{_libexecdir}/gvfsd-network
 %{_libexecdir}/gvfsd-nfs
+%{_libexecdir}/gvfsd-onedrive
 %{_libexecdir}/gvfsd-recent
 %{_libexecdir}/gvfsd-sftp
 %{_libexecdir}/gvfsd-trash
@@ -217,6 +218,7 @@ killall -USR1 gvfsd >&/dev/null || :
 %dir %{_datadir}/gvfs
 %dir %{_datadir}/gvfs/mounts
 %dir %{_datadir}/gvfs/remote-volume-monitors
+%{_datadir}/gvfs/mounts/onedrive.mount
 %{_datadir}/gvfs/mounts/ftpis.mount
 %{_datadir}/gvfs/mounts/google.mount
 %{_datadir}/gvfs/mounts/admin.mount
