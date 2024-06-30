@@ -183,7 +183,7 @@ killall -USR1 gvfsd >&/dev/null || :
 %{_libexecdir}/gvfsd-admin
 %{_libexecdir}/gvfsd-afp
 %{_libexecdir}/gvfsd-afp-browse
-%{_libexecdir}/gvfsd-burn
+#{_libexecdir}/gvfsd-burn
 %{_libexecdir}/gvfsd-cdda
 %{_libexecdir}/gvfsd-computer
 %{_libexecdir}/gvfsd-dav
@@ -225,7 +225,7 @@ killall -USR1 gvfsd >&/dev/null || :
 %{_datadir}/gvfs/mounts/afp-browse.mount
 %{_datadir}/gvfs/mounts/afp.mount
 %{_datadir}/gvfs/mounts/burn.mount
-%{_datadir}/gvfs/mounts/cdda.mount
+#{_datadir}/gvfs/mounts/cdda.mount
 %{_datadir}/gvfs/mounts/computer.mount
 %{_datadir}/gvfs/mounts/dav.mount
 %{_datadir}/gvfs/mounts/dav+sd.mount
