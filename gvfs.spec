@@ -247,7 +247,7 @@ killall -USR1 gvfsd >&/dev/null || :
 
 %files -n %{devname}
 %doc NEWS
-%{_includedir}/gvfs-client
+#{_includedir}/gvfs-client
 
 %files fuse
 %{_libexecdir}/gvfsd-fuse
