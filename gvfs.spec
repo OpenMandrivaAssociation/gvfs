@@ -57,7 +57,7 @@ BuildRequires:	pkgconfig(libnfs) >= 1.9.8
 BuildRequires:	pkgconfig(libsecret-unstable)
 BuildRequires:	pkgconfig(libsoup-3.0)
 BuildRequires:	pkgconfig(libsystemd)
-BuildRequires:  pkgconfig(msgraph-0.1)
+BuildRequires:  pkgconfig(msgraph-1)
 BuildRequires:	pkgconfig(openobex)
 BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	pkgconfig(smbclient)
