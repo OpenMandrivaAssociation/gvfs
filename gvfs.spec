@@ -199,7 +199,7 @@ killall -USR1 gvfsd >&/dev/null || :
 %{_libexecdir}/gvfsd-sftp
 %{_libexecdir}/gvfsd-trash
 %{_libexecdir}/gvfs-goa-volume-monitor
-%{_libexecdir}/gvfsd-google
+#{_libexecdir}/gvfsd-google
 %{_libexecdir}/gvfs-udisks2-volume-monitor
 %{_libexecdir}/gvfsd-wsdd
 %{_libdir}/gvfs/libgvfscommon.so
@@ -220,7 +220,7 @@ killall -USR1 gvfsd >&/dev/null || :
 %dir %{_datadir}/gvfs/remote-volume-monitors
 %{_datadir}/gvfs/mounts/onedrive.mount
 %{_datadir}/gvfs/mounts/ftpis.mount
-%{_datadir}/gvfs/mounts/google.mount
+#{_datadir}/gvfs/mounts/google.mount
 %{_datadir}/gvfs/mounts/admin.mount
 %{_datadir}/gvfs/mounts/afp-browse.mount
 %{_datadir}/gvfs/mounts/afp.mount
