@@ -14,7 +14,7 @@
 Summary:	Glib VFS library
 Name:		gvfs
 Version:	1.60.1
-Release:	1
+Release:	2
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		https://www.gnome.org/
@@ -62,7 +62,6 @@ BuildRequires:	pkgconfig(openobex)
 BuildRequires:	pkgconfig(polkit-gobject-1)
 BuildRequires:	pkgconfig(smbclient)
 BuildRequires:	pkgconfig(udisks2)
-BuildRequires:	pkgconfig(goa-1.0)
 BuildRequires:	pkgconfig(libgdata)
 %if %{enable_gphoto2}
 BuildRequires:	pkgconfig(libgphoto2)
@@ -82,6 +81,8 @@ Suggests:	%{name}-archive
 %if %{enable_gphoto2}
 Suggests:	%{name}-gphoto2
 %endif
+#FIXME# Hard requirement for now to ensure no surprises on update, but should probably be Recommends too
+Requires:	(%{name}-goa = %{EVRD} if gnome-shell)
 Conflicts:	%{name}-gphoto2 <= 1.13.2-2
 %rename gvfs-obexftp
 
@@ -125,6 +126,14 @@ Requires:	%{name} = %{version}-%{release}
 This package provides support for accessing files inside Zip and Tar archives,
 as well as ISO images, to applications using gvfs.
 
+%package goa
+Summary:	GOA support for gvfs
+Requires:	%{name} = %{EVRD}
+
+%description goa
+This package provides seamless integration with gnome-online-accounts
+file services.
+
 %package gphoto2
 Summary:	Gphoto2 support for gvfs
 Group:		System/Libraries
@@ -154,8 +163,7 @@ This package provides support for reading and writing files on
 MTP based devices (Media Transfer Protocol) to applications using gvfs.
 
 %prep
-%setup -q
-%autopatch -p1
+%autosetup -p1
 
 %build
 %meson \
@@ -194,31 +202,25 @@ killall -USR1 gvfsd >&/dev/null || :
 %{_libexecdir}/gvfsd-metadata
 %{_libexecdir}/gvfsd-network
 %{_libexecdir}/gvfsd-nfs
-%{_libexecdir}/gvfsd-onedrive
 %{_libexecdir}/gvfsd-recent
 %{_libexecdir}/gvfsd-sftp
 %{_libexecdir}/gvfsd-trash
-%{_libexecdir}/gvfs-goa-volume-monitor
 #{_libexecdir}/gvfsd-google
 %{_libexecdir}/gvfs-udisks2-volume-monitor
 %{_libexecdir}/gvfsd-wsdd
 %{_libdir}/gvfs/libgvfscommon.so
 %{_libdir}/gvfs/libgvfsdaemon.so
-%{_datadir}/gvfs/remote-volume-monitors/goa.monitor
 %{_userunitdir}/gvfs-daemon.service
 %{_userunitdir}/gvfs-metadata.service
 %{_userunitdir}/gvfs-udisks2-volume-monitor.service
-%{_userunitdir}/gvfs-goa-volume-monitor.service
 %{_datadir}/dbus-1/services/org.gtk.vfs.UDisks2VolumeMonitor.service
 %{_datadir}/dbus-1/services/org.gtk.vfs.Daemon.service
 %{_datadir}/dbus-1/services/org.gtk.vfs.Metadata.service
-%{_datadir}/dbus-1/services/org.gtk.vfs.GoaVolumeMonitor.service
 %{_datadir}/glib-2.0/schemas/org.gnome.system.wsdd.gschema.xml
 %{_datadir}/gvfs/mounts/wsdd.mount
 %dir %{_datadir}/gvfs
 %dir %{_datadir}/gvfs/mounts
 %dir %{_datadir}/gvfs/remote-volume-monitors
-%{_datadir}/gvfs/mounts/onedrive.mount
 %{_datadir}/gvfs/mounts/ftpis.mount
 #{_datadir}/gvfs/mounts/google.mount
 %{_datadir}/gvfs/mounts/admin.mount
@@ -263,6 +265,14 @@ killall -USR1 gvfsd >&/dev/null || :
 %files archive
 %{_libexecdir}/gvfsd-archive
 %{_datadir}/gvfs/mounts/archive.mount
+
+%files goa
+%{_libexecdir}/gvfs-goa-volume-monitor
+%{_datadir}/dbus-1/services/org.gtk.vfs.GoaVolumeMonitor.service
+%{_datadir}/gvfs/remote-volume-monitors/goa.monitor
+%{_datadir}/gvfs/mounts/onedrive.mount
+%{_libexecdir}/gvfsd-onedrive
+%{_userunitdir}/gvfs-goa-volume-monitor.service
 
 %if %{enable_gphoto2}
 %files gphoto2
