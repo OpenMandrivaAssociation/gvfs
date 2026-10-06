@@ -76,7 +76,6 @@ Requires:	udisks2
 #FIXME# We should prob. replace suggests with recomends.
 Suggests:	%{name}-fuse
 Suggests:	%{name}-smb
-Suggests:	%{name}-archive
 #Suggests:	%{name}-obexftp
 %if %{enable_gphoto2}
 Suggests:	%{name}-gphoto2
@@ -85,6 +84,7 @@ Suggests:	%{name}-gphoto2
 Requires:	(%{name}-goa = %{EVRD} if gnome-shell)
 Conflicts:	%{name}-gphoto2 <= 1.13.2-2
 %rename gvfs-obexftp
+Obsoletes: gvfs-archive < 1.61.1-1
 
 %description
 This is a Virtual File System library based on gio and Glib.
@@ -116,15 +116,6 @@ Requires:	%{name} = %{version}-%{release}
 %description smb
 This package provides support for reading and writing files on windows
 shares (SMB) to applications using gvfs.
-
-%package archive
-Summary:	Archiving support for gvfs
-Group:		System/Libraries
-Requires:	%{name} = %{version}-%{release}
-
-%description archive
-This package provides support for accessing files inside Zip and Tar archives,
-as well as ISO images, to applications using gvfs.
 
 %package goa
 Summary:	GOA support for gvfs
@@ -253,10 +244,6 @@ killall -USR1 gvfsd >&/dev/null || :
 %{_datadir}/gvfs/mounts/smb.mount
 %{_datadir}/GConf/gsettings/gvfs-smb.convert
 %{_datadir}/glib-2.0/schemas/org.gnome.system.smb.gschema.xml
-
-%files archive
-%{_libexecdir}/gvfsd-archive
-%{_datadir}/gvfs/mounts/archive.mount
 
 %files goa
 %{_libexecdir}/gvfs-goa-volume-monitor
